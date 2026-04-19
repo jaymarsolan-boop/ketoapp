@@ -446,6 +446,94 @@
     background: linear-gradient(90deg, transparent, var(--border2), transparent);
     margin: 2rem 0;
   }
+
+  /* ── PRINT BUTTON ── */
+  .print-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 1.25rem;
+    padding: 13px 24px;
+    background: transparent;
+    border: 1px solid var(--border2);
+    border-radius: var(--radius-lg);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--text2);
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+    justify-content: center;
+    letter-spacing: 0.5px;
+  }
+  .print-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+  .print-btn svg { flex-shrink: 0; }
+
+  /* ── PRINT STYLES ── */
+  @media print {
+    @page { margin: 1.8cm 1.5cm; size: letter; }
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    body { background: #fff !important; color: #1a1a1a !important; font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+    .site-header, .hero, .card:not(.macro-section),
+    .calc-btn, .print-btn, .site-footer, #results > .divider { display: none !important; }
+    #results { display: block !important; animation: none !important; }
+    .main { max-width: 100%; padding: 0; margin: 0; }
+
+    .print-header { display: flex !important; align-items: center; justify-content: space-between; border-bottom: 2px solid #2a5c3a; padding-bottom: 14px; margin-bottom: 20px; }
+    .print-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; color: #2a5c3a; display: flex; align-items: center; gap: 8px; }
+    .print-logo-dot { width: 8px; height: 8px; border-radius: 50%; background: #2a5c3a; display: inline-block; }
+    .print-meta { font-size: 9px; color: #666; text-align: right; line-height: 1.6; }
+
+    .results-header { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: #1a1a1a; margin-bottom: 4px; }
+    .results-sub { font-size: 10px; color: #666; margin-bottom: 14px; }
+    .depth-pill { border: 1px solid #2a5c3a !important; color: #2a5c3a !important; background: #eaf5ee !important; font-size: 10px; padding: 3px 12px; margin-bottom: 14px; }
+
+    .metrics { display: grid !important; grid-template-columns: repeat(4,1fr) !important; gap: 8px !important; margin-bottom: 14px !important; }
+    .metric-box { background: #f5f7f5 !important; border: 1px solid #d0d8d0 !important; border-radius: 6px !important; padding: 10px 8px !important; text-align: center !important; }
+    .metric-box.accent-box { background: #eaf5ee !important; border-color: #2a5c3a !important; }
+    .metric-val { font-family: 'Cormorant Garamond', serif !important; font-size: 1.5rem !important; color: #1a1a1a !important; line-height: 1 !important; }
+    .metric-box.accent-box .metric-val { color: #2a5c3a !important; }
+    .metric-lbl { font-size: 8px !important; color: #666 !important; margin-top: 4px !important; }
+
+    .macro-section { background: #f5f7f5 !important; border: 1px solid #d0d8d0 !important; border-radius: 8px !important; padding: 14px !important; margin-bottom: 14px !important; display: block !important; }
+    .card-title { color: #666 !important; font-size: 9px !important; margin-bottom: 10px !important; }
+    .card-title::after { background: #d0d8d0 !important; }
+    .macro-track { height: 26px !important; border-radius: 6px !important; margin: 8px 0 !important; }
+    .bar-fat  { background: #2a5c3a !important; }
+    .bar-prot { background: #c4883a !important; }
+    .bar-carb { background: #c45a3a !important; }
+    .bar-seg  { font-size: 10px !important; color: #fff !important; }
+    .macro-legend { gap: 14px !important; }
+    .leg { font-size: 10px !important; color: #444 !important; }
+    .leg-dot { width: 7px !important; height: 7px !important; }
+    .gram-cards { display: grid !important; grid-template-columns: 1fr 1fr 1fr !important; gap: 8px !important; margin-top: 10px !important; }
+    .gram-card { border: 1px solid #d0d8d0 !important; background: #fff !important; border-radius: 6px !important; padding: 10px !important; }
+    .gram-val { font-size: 1.7rem !important; }
+    .gram-val.fat  { color: #2a5c3a !important; }
+    .gram-val.prot { color: #c4883a !important; }
+    .gram-val.carb { color: #c45a3a !important; }
+    .gram-lbl { font-size: 8px !important; color: #666 !important; }
+    .gram-sub { font-size: 8px !important; color: #888 !important; }
+
+    .print-symptoms { display: grid !important; grid-template-columns: 1fr 1fr 1fr !important; gap: 6px !important; margin-bottom: 14px !important; }
+    .print-sym-item { background: #f5f7f5; border: 1px solid #d0d8d0; border-radius: 6px; padding: 7px 10px; display: flex; justify-content: space-between; align-items: center; }
+    .print-sym-name { font-size: 9px; color: #555; }
+    .print-sym-val  { font-size: 13px; font-weight: 500; color: #1a1a1a; }
+
+    .notes-card { background: #f5f7f5 !important; border: 1px solid #d0d8d0 !important; border-left: 3px solid #2a5c3a !important; border-radius: 6px !important; padding: 12px 14px !important; margin-top: 12px !important; page-break-inside: avoid; }
+    .notes-title { color: #2a5c3a !important; font-size: 9px !important; margin-bottom: 8px !important; }
+    .note-line { font-size: 10px !important; color: #333 !important; line-height: 1.7 !important; padding: 3px 0 !important; border-bottom: 1px solid #e0e0e0 !important; }
+    .note-line::before { color: #888 !important; }
+
+    .disclaimer { background: #fffbf0 !important; border: 1px solid #e8d5a0 !important; border-radius: 6px !important; padding: 8px 12px !important; font-size: 9px !important; color: #666 !important; margin-top: 10px !important; }
+    .disclaimer strong { color: #c4883a !important; }
+
+    .print-footer { display: flex !important; justify-content: space-between; margin-top: 14px; padding-top: 10px; border-top: 1px solid #d0d8d0; font-size: 8px; color: #999; }
+  }
+
+  /* Hide print-only elements on screen */
+  .print-header, .print-symptoms, .print-footer { display: none; }
+
 </style>
 </head>
 <body>
@@ -609,6 +697,15 @@
   <!-- RESULTS -->
   <div id="results">
     <div class="divider"></div>
+    <!-- Print-only header -->
+    <div class="print-header">
+      <div class="print-logo"><span class="print-logo-dot"></span>KetoMind Clinical Calculator</div>
+      <div class="print-meta" id="print-meta">—</div>
+    </div>
+
+    <!-- Print-only symptom summary -->
+    <div class="print-symptoms" id="print-symptoms"></div>
+
     <div class="results-header">Clinical Recommendations</div>
     <div class="results-sub" id="res-sub">—</div>
     <div id="depth-pill"></div>
@@ -671,6 +768,11 @@
     <div class="disclaimer">
       <strong>Clinical Use Only.</strong> This tool is intended for use by licensed metabolic psychiatry clinicians. Recommendations should be interpreted alongside full clinical assessment. Not a substitute for individualized medical advice. Monitor serum electrolytes, lipids, and BHB levels per protocol.
     </div>
+
+    <button class="print-btn" onclick="window.print()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      Print / Save as PDF
+    </button>
   </div>
 
 </main>
@@ -866,10 +968,28 @@
     const nb = document.getElementById('notes-body');
     nb.innerHTML = notes.map(n => `<div class="note-line">${n}</div>`).join('');
 
+    updatePrintFields(state.sex, age, ftVal, inVal, wtLbs, protPerKg, syms, ibwLbs, ibwKg, goalLabel);
+
     const res = document.getElementById('results');
     res.className = 'show';
     setTimeout(() => res.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
   }
+
+  // ── Populate print-only fields ──
+  function updatePrintFields(sex, age, ftVal, inVal, wtLbs, protPerKg, syms, ibwLbs, ibwKg, goalLabel) {
+    const symLabels = ['Mood/Depression','Anxiety','Cognitive Fog','Energy/Fatigue','Mood Instability','Sleep Disturbance'];
+    const symVals   = syms;
+    const ps = document.getElementById('print-symptoms');
+    if(ps) ps.innerHTML = symLabels.map((l,i) =>
+      `<div class="print-sym-item"><span class="print-sym-name">${l}</span><span class="print-sym-val">${symVals[i]}/10</span></div>`
+    ).join('');
+    const pm = document.getElementById('print-meta');
+    const htDisp = `${ftVal}ft ${inVal}in`;
+    if(pm) pm.innerHTML = `${sex==='M'?'Male':'Female'} · Age ${age} · ${htDisp} · ${wtLbs} lbs<br>IBW: ${ibwLbs} lbs (${ibwKg.toFixed(1)} kg) · Protein: ${protPerKg.toFixed(1)} g/kg IBW<br>Goal: ${goalLabel} · Generated: ${new Date().toLocaleDateString()}`;
+    const pd = document.getElementById('print-date');
+    if(pd) pd.textContent = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  }
+
 </script>
 </body>
 </html>
