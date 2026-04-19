@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KetoMind Clinical Calculator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0d0f0e;
+    --bg2: #131614;
+    --bg3: #191c1a;
+    --bg4: #1f2420;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --text: #e8ede9;
+    --text2: #8a9a8c;
+    --text3: #5a6b5c;
+    --accent: #4a9e6b;
+    --accent2: #3a7d54;
+    --accent-glow: rgba(74,158,107,0.15);
+    --amber: #c4883a;
+    --amber-bg: rgba(196,136,58,0.12);
+    --coral: #c45a3a;
+    --coral-bg: rgba(196,90,58,0.12);
+    --teal: #3a9e8a;
+    --teal-bg: rgba(58,158,138,0.12);
+    --gold: #b8a060;
+    --radius: 8px;
+    --radius-lg: 14px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  .site-header {
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+    position: sticky;
+    top: 0;
+    background: rgba(13,15,14,0.92);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    color: var(--text);
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .logo-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 10px var(--accent);
+    flex-shrink: 0;
+  }
+  .header-tag {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text3);
+    border: 1px solid var(--border2);
+    padding: 4px 10px;
+    border-radius: 100px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 5rem 2rem 3rem;
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .hero p {
+    font-size: 13px;
+    color: var(--text2);
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  /* ── MAIN LAYOUT ── */
+  .main {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem 6rem;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border2), transparent);
+  }
+  .card-title {
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .card-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .card-num {
+    width: 22px; height: 22px;
+    border: 1px solid var(--border2);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* ── FORM GRID ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; }
+  @media(max-width: 580px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+    .site-header { padding: 0 1rem; }
+    .main { padding: 0 1rem 4rem; }
+    .hero { padding: 3rem 1rem 2rem; }
+    .card { padding: 1.5rem; }
+  }
+
+  /* ── FIELD ── */
+  .field { display: flex; flex-direction: column; gap: 7px; }
+  .field label {
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .field input, .field select {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 10px 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+    -webkit-appearance: none;
+  }
+  .field input:focus, .field select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-glow);
+  }
+  .field input::placeholder { color: var(--text3); font-size: 12px; }
+  .field select option { background: var(--bg3); }
+  .field .hint {
+    font-size: 10px;
+    color: var(--text3);
+    line-height: 1.5;
+  }
+
+  /* Height feet + inches row */
+  .ht-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+  /* ── SEGMENTED ── */
+  .seg { display: flex; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+  .seg button {
+    flex: 1;
+    padding: 10px 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 300;
+    background: transparent;
+    border: none;
+    border-right: 1px solid var(--border);
+    color: var(--text3);
+    cursor: pointer;
+    transition: all 0.18s;
+    letter-spacing: 0.3px;
+  }
+  .seg button:last-child { border-right: none; }
+  .seg button:hover { color: var(--text2); background: var(--bg3); }
+  .seg button.on {
+    background: var(--accent);
+    color: #fff;
+    font-weight: 400;
+  }
+  .seg button.on-amber { background: var(--amber); color: #fff; font-weight: 400; }
+  .seg button.on-coral { background: var(--coral); color: #fff; font-weight: 400; }
+
+  /* ── SLIDER ── */
+  .slider-group { display: flex; flex-direction: column; gap: 6px; }
+  .slider-label-row { display: flex; justify-content: space-between; align-items: baseline; }
+  .slider-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; }
+  .slider-val { font-size: 14px; font-weight: 500; color: var(--text); }
+  input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 3px;
+    background: var(--bg4);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+  }
+  input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 8px var(--accent-glow);
+    cursor: pointer;
+    transition: transform 0.1s;
+  }
+  input[type=range]::-webkit-slider-thumb:active { transform: scale(1.25); }
+  input[type=range]::-moz-range-thumb {
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--bg);
+    cursor: pointer;
+  }
+  .sym-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  @media(max-width: 500px) { .sym-grid { grid-template-columns: 1fr; } }
+  .scale-ends { display: flex; justify-content: space-between; font-size: 9px; color: var(--text3); letter-spacing: 0.3px; margin-top: 2px; }
+
+  /* ── BUTTON ── */
+  .calc-btn {
+    width: 100%;
+    padding: 16px 32px;
+    background: var(--accent);
+    border: none;
+    border-radius: var(--radius-lg);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    font-weight: 400;
+    font-style: italic;
+    color: #fff;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: all 0.2s;
+    margin-top: 0.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .calc-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent);
+    pointer-events: none;
+  }
+  .calc-btn:hover { background: var(--accent2); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(74,158,107,0.25); }
+  .calc-btn:active { transform: translateY(0); }
+
+  /* ── RESULTS ── */
+  #results { display: none; animation: fadeUp 0.4s ease forwards; }
+  #results.show { display: block; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+  .results-header {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .results-sub { font-size: 12px; color: var(--text3); margin-bottom: 2rem; }
+
+  /* metrics row */
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 1.5rem; }
+  @media(max-width: 600px) { .metrics { grid-template-columns: repeat(2, 1fr); } }
+  .metric-box {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 0.75rem;
+    text-align: center;
+  }
+  .metric-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1;
+  }
+  .metric-lbl { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text3); margin-top: 6px; }
+  .metric-box.accent-box { border-color: rgba(74,158,107,0.3); background: var(--accent-glow); }
+  .metric-box.accent-box .metric-val { color: var(--accent); }
+
+  /* macro bar */
+  .macro-section { margin-bottom: 1.5rem; }
+  .macro-track {
+    height: 36px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    display: flex;
+    margin: 12px 0 10px;
+  }
+  .bar-seg {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 500; color: #fff;
+    transition: width 0.5s cubic-bezier(.4,0,.2,1);
+    min-width: 0;
+  }
+  .bar-fat { background: var(--accent); }
+  .bar-prot { background: var(--amber); }
+  .bar-carb { background: var(--coral); }
+  .macro-legend { display: flex; gap: 18px; flex-wrap: wrap; }
+  .leg { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--text2); }
+  .leg-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+  /* gram cards */
+  .gram-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 1.25rem; }
+  @media(max-width: 500px) { .gram-cards { grid-template-columns: 1fr; } }
+  .gram-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem;
+    text-align: center;
+    background: var(--bg3);
+  }
+  .gram-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1;
+  }
+  .gram-val.fat { color: var(--accent); }
+  .gram-val.prot { color: var(--amber); }
+  .gram-val.carb { color: var(--coral); }
+  .gram-lbl { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--text3); margin-top: 6px; }
+  .gram-sub { font-size: 10px; color: var(--text3); margin-top: 2px; }
+
+  /* depth badge */
+  .depth-pill {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 5px 14px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    margin-bottom: 1.5rem;
+    border: 1px solid;
+  }
+  .depth-pill.light { background: var(--amber-bg); color: var(--amber); border-color: rgba(196,136,58,0.25); }
+  .depth-pill.medium { background: var(--teal-bg); color: var(--teal); border-color: rgba(58,158,138,0.25); }
+  .depth-pill.deep { background: var(--accent-glow); color: var(--accent); border-color: rgba(74,158,107,0.25); }
+  .depth-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+  /* clinical notes */
+  .notes-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    margin-top: 1.25rem;
+  }
+  .notes-title { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
+  .note-line { font-size: 12px; color: var(--text2); line-height: 1.8; padding: 4px 0; border-bottom: 1px solid var(--border); }
+  .note-line:last-child { border-bottom: none; }
+  .note-line::before { content: '→  '; color: var(--text3); }
+
+  /* warning card */
+  .disclaimer {
+    background: rgba(196,136,58,0.06);
+    border: 1px solid rgba(196,136,58,0.18);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    font-size: 11px;
+    color: var(--text3);
+    line-height: 1.7;
+    margin-top: 1rem;
+  }
+  .disclaimer strong { color: var(--amber); font-weight: 500; }
+
+  /* footer */
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.5px;
+  }
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border2), transparent);
+    margin: 2rem 0;
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo"><span class="logo-dot"></span>KetoMind</div>
+  <div class="header-tag">Clinical · Beta</div>
+</header>
+
+<section class="hero">
+  <div class="hero-eyebrow">Metabolic Psychiatry</div>
+  <h1>Ketogenic Diet<br><em>Clinical Calculator</em></h1>
+  <p>Personalized calorie targets and therapeutic macro splits based on client biometrics, symptom burden, and ketogenic depth protocol.</p>
+</section>
+
+<main class="main">
+
+  <!-- CARD 1: Demographics -->
+  <div class="card">
+    <div class="card-title"><span class="card-num">1</span> Client Demographics</div>
+    <div class="grid-3" style="margin-bottom:1.25rem">
+      <div class="field">
+        <label>Biological Sex</label>
+        <div class="seg" id="sex-seg">
+          <button class="on" onclick="setSeg('sex','M',this)">Male</button>
+          <button onclick="setSeg('sex','F',this)">Female</button>
+        </div>
+      </div>
+      <div class="field">
+        <label>Age (years)</label>
+        <input type="number" id="age" min="18" max="100" placeholder="e.g. 42" value="42">
+      </div>
+      <div class="field">
+        <label>Activity Level</label>
+        <select id="activity">
+          <option value="1.2">Sedentary (desk job)</option>
+          <option value="1.375" selected>Lightly active</option>
+          <option value="1.55">Moderately active</option>
+          <option value="1.725">Very active</option>
+        </select>
+      </div>
+    </div>
+    <div class="grid-2">
+      <div class="field">
+        <label>Height</label>
+        <div class="ht-row">
+          <input type="number" id="ht-ft" min="4" max="7" placeholder="ft" value="5">
+          <input type="number" id="ht-in" min="0" max="11" placeholder="in" value="9">
+        </div>
+      </div>
+      <div class="field">
+        <label>Weight (lbs)</label>
+        <input type="number" id="wt" min="80" max="700" placeholder="e.g. 175" value="185">
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 2: Body Composition -->
+  <div class="card">
+    <div class="card-title"><span class="card-num">2</span> Body Composition</div>
+    <div class="grid-2">
+      <div class="field">
+        <label>Waist (inches)</label>
+        <input type="number" id="waist" min="20" max="80" placeholder="e.g. 36" value="36" step="0.5">
+        <span class="hint">Measured at navel</span>
+      </div>
+      <div class="field">
+        <label>Hip (inches)</label>
+        <input type="number" id="hip" min="20" max="80" placeholder="e.g. 40" value="40" step="0.5">
+        <span class="hint">Widest point</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 3: Symptom Severity -->
+  <div class="card">
+    <div class="card-title"><span class="card-num">3</span> Symptom Severity <span style="font-size:10px;color:var(--text3);margin-left:4px">(0 = none · 10 = severe)</span></div>
+    <div class="sym-grid">
+      <div class="slider-group">
+        <div class="slider-label-row">
+          <span class="slider-label">Mood / Depression</span>
+          <span class="slider-val" id="v1">5</span>
+        </div>
+        <input type="range" min="0" max="10" value="5" step="1" id="s1" oninput="sv('v1',this.value)">
+      </div>
+      <div class="slider-group">
+        <div class="slider-label-row">
+          <span class="slider-label">Anxiety</span>
+          <span class="slider-val" id="v2">5</span>
+        </div>
+        <input type="range" min="0" max="10" value="5" step="1" id="s2" oninput="sv('v2',this.value)">
+      </div>
+      <div class="slider-group">
+        <div class="slider-label-row">
+          <span class="slider-label">Cognitive Fog</span>
+          <span class="slider-val" id="v3">5</span>
+        </div>
+        <input type="range" min="0" max="10" value="5" step="1" id="s3" oninput="sv('v3',this.value)">
+      </div>
+      <div class="slider-group">
+        <div class="slider-label-row">
+          <span class="slider-label">Energy / Fatigue</span>
+          <span class="slider-val" id="v4">5</span>
+        </div>
+        <input type="range" min="0" max="10" value="5" step="1" id="s4" oninput="sv('v4',this.value)">
+        <div class="scale-ends"><span>0 = normal energy</span><span>10 = total exhaustion</span></div>
+      </div>
+      <div class="slider-group">
+        <div class="slider-label-row">
+          <span class="slider-label">Mood Instability</span>
+          <span class="slider-val" id="v5">4</span>
+        </div>
+        <input type="range" min="0" max="10" value="4" step="1" id="s5" oninput="sv('v5',this.value)">
+      </div>
+      <div class="slider-group">
+        <div class="slider-label-row">
+          <span class="slider-label">Sleep Disturbance</span>
+          <span class="slider-val" id="v6">4</span>
+        </div>
+        <input type="range" min="0" max="10" value="4" step="1" id="s6" oninput="sv('v6',this.value)">
+        <div class="scale-ends"><span>0 = normal sleep</span><span>10 = severely disrupted</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CARD 4: Protocol -->
+  <div class="card">
+    <div class="card-title"><span class="card-num">4</span> Ketogenic Protocol</div>
+    <div class="field" style="margin-bottom:1.25rem">
+      <label>Ketogenic Depth</label>
+      <div class="seg" id="kd-seg">
+        <button class="on" onclick="setSeg('kd','light',this)">Light · 1.0–1.5 mmol/L</button>
+        <button onclick="setSeg('kd','medium',this)">Medium · 1.5–3.0 mmol/L</button>
+        <button onclick="setSeg('kd','deep',this)">Deep · 3.0–5.0 mmol/L</button>
+      </div>
+    </div>
+    <div class="field" style="margin-bottom:1.25rem">
+      <label>Primary Goal</label>
+      <div class="seg" id="goal-seg">
+        <button class="on" onclick="setSeg('goal','maintain',this)">Weight Maintenance</button>
+        <button onclick="setSeg('goal','loss',this)">Weight Loss</button>
+        <button onclick="setSeg('goal','gain',this)">Weight Gain</button>
+      </div>
+    </div>
+    <div class="field">
+      <label>Protein Target</label>
+      <div class="slider-group">
+        <div class="slider-label-row">
+          <span class="slider-label">g / kg ideal body weight</span>
+          <span class="slider-val" id="vp">1.6 g/kg</span>
+        </div>
+        <input type="range" min="1.0" max="3.0" value="1.6" step="0.1" id="prot-target" oninput="updateProteinSlider(this.value)">
+        <div class="scale-ends"><span>1.0 — maintenance minimum</span><span>3.0 — therapeutic maximum</span></div>
+      </div>
+      <div class="hint" id="prot-hint" style="margin-top:6px">—</div>
+    </div>
+  </div>
+
+  <button class="calc-btn" onclick="calculate()">Generate Clinical Recommendations →</button>
+
+  <!-- RESULTS -->
+  <div id="results">
+    <div class="divider"></div>
+    <div class="results-header">Clinical Recommendations</div>
+    <div class="results-sub" id="res-sub">—</div>
+    <div id="depth-pill"></div>
+
+    <div class="metrics">
+      <div class="metric-box">
+        <div class="metric-val" id="r-bmi">—</div>
+        <div class="metric-lbl">BMI</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-val" id="r-whr">—</div>
+        <div class="metric-lbl">Waist-Hip Ratio</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-val" id="r-bmr">—</div>
+        <div class="metric-lbl">BMR (kcal)</div>
+      </div>
+      <div class="metric-box accent-box">
+        <div class="metric-val" id="r-target">—</div>
+        <div class="metric-lbl">Target kcal/day</div>
+      </div>
+    </div>
+
+    <div class="macro-section card" style="margin-bottom:1.5rem">
+      <div class="card-title" style="margin-bottom:0.75rem">Macronutrient Split</div>
+      <div class="macro-track">
+        <div class="bar-seg bar-fat" id="bar-fat">—</div>
+        <div class="bar-seg bar-prot" id="bar-prot">—</div>
+        <div class="bar-seg bar-carb" id="bar-carb">—</div>
+      </div>
+      <div class="macro-legend">
+        <div class="leg"><div class="leg-dot" style="background:var(--accent)"></div>Fat</div>
+        <div class="leg"><div class="leg-dot" style="background:var(--amber)"></div>Protein</div>
+        <div class="leg"><div class="leg-dot" style="background:var(--coral)"></div>Net Carbs</div>
+      </div>
+      <div class="gram-cards">
+        <div class="gram-card">
+          <div class="gram-val fat" id="g-fat">—</div>
+          <div class="gram-lbl">Fat (g)</div>
+          <div class="gram-sub" id="g-fat-kcal">—</div>
+        </div>
+        <div class="gram-card">
+          <div class="gram-val prot" id="g-prot">—</div>
+          <div class="gram-lbl">Protein (g)</div>
+          <div class="gram-sub" id="g-prot-kcal">—</div>
+        </div>
+        <div class="gram-card">
+          <div class="gram-val carb" id="g-carb">—</div>
+          <div class="gram-lbl">Net Carbs (g)</div>
+          <div class="gram-sub" id="g-carb-max">—</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notes-card">
+      <div class="notes-title">Clinical Notes</div>
+      <div id="notes-body"></div>
+    </div>
+
+    <div class="disclaimer">
+      <strong>Clinical Use Only.</strong> This tool is intended for use by licensed metabolic psychiatry clinicians. Recommendations should be interpreted alongside full clinical assessment. Not a substitute for individualized medical advice. Monitor serum electrolytes, lipids, and BHB levels per protocol.
+    </div>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  KetoMind Clinical Calculator · Metabolic Psychiatry · For practitioner use
+</footer>
+
+<script>
+  // ── State ──
+  const state = { sex: 'M', kd: 'light', goal: 'maintain' };
+
+  function sv(id, val) { document.getElementById(id).textContent = val; }
+
+  function setSeg(key, val, el) {
+    state[key] = val;
+    const grp = el.closest('.seg');
+    grp.querySelectorAll('button').forEach(b => b.className = '');
+    el.classList.add('on');
+  }
+
+  // Protein slider live hint
+  function updateProteinSlider(val) {
+    const v = parseFloat(val);
+    document.getElementById('vp').textContent = v.toFixed(1) + ' g/kg';
+    let hint = '';
+    if(v <= 1.2)      hint = 'Minimal — adequate for sedentary maintenance; may be insufficient for psychiatric support.';
+    else if(v <= 1.6) hint = 'Moderate — standard ketogenic range; suitable for most maintenance and light-activity clients.';
+    else if(v <= 2.0) hint = 'Elevated — supports neurotransmitter synthesis and muscle retention; recommended for active or high-symptom clients.';
+    else if(v <= 2.5) hint = 'High — appropriate for weight gain, athletes, or clients requiring intensive anabolic support.';
+    else              hint = 'Therapeutic maximum — use for muscle-building, refeeding, or clinically directed high-protein protocols only.';
+    document.getElementById('prot-hint').textContent = hint;
+  }
+  // Init hint on load
+  window.addEventListener('DOMContentLoaded', () => updateProteinSlider(1.6));
+
+  // ── Ideal Body Weight (Devine formula) ──
+  function calcIBW(sex, htInTotal) {
+    // Devine: male = 50 + 2.3*(in over 60); female = 45.5 + 2.3*(in over 60)
+    const base = sex === 'M' ? 50 : 45.5;
+    const ibwKg = Math.max(base + 2.3 * (htInTotal - 60), base);
+    return ibwKg;
+  }
+
+  // ── Calculation ──
+  function calculate() {
+    const age    = parseFloat(document.getElementById('age').value) || 42;
+    const ftVal  = parseFloat(document.getElementById('ht-ft').value) || 5;
+    const inVal  = parseFloat(document.getElementById('ht-in').value) || 9;
+    const wtLbs  = parseFloat(document.getElementById('wt').value) || 185;
+    const waistIn= parseFloat(document.getElementById('waist').value) || 36;
+    const hipIn  = parseFloat(document.getElementById('hip').value) || 40;
+    const actMult= parseFloat(document.getElementById('activity').value) || 1.375;
+    const protPerKg = parseFloat(document.getElementById('prot-target').value) || 1.6;
+
+    // Convert to metric for Mifflin-St Jeor
+    const htInTotal = ftVal * 12 + inVal;
+    const htCm  = htInTotal * 2.54;
+    const wtKg  = wtLbs * 0.453592;
+    const whr   = waistIn / hipIn;
+
+    // IBW
+    const ibwKg = calcIBW(state.sex, htInTotal);
+    const ibwLbs = Math.round(ibwKg * 2.205);
+
+    // Symptoms avg
+    const syms = [1,2,3,4,5,6].map(i => parseInt(document.getElementById('s'+i).value));
+    const avgSym = syms.reduce((a,b)=>a+b,0)/6;
+
+    // Mifflin-St Jeor BMR
+    let bmr;
+    if(state.sex === 'M') bmr = 10*wtKg + 6.25*htCm - 5*age + 5;
+    else                  bmr = 10*wtKg + 6.25*htCm - 5*age - 161;
+
+    const tdee = bmr * actMult;
+
+    // BMI (imperial: 703 × lbs / in²)
+    const bmi = 703 * wtLbs / (htInTotal * htInTotal);
+
+    // Target calories by goal
+    let kcal;
+    if(state.goal === 'loss') {
+      const def = avgSym > 7 ? 0.10 : avgSym > 4 ? 0.15 : 0.20;
+      kcal = tdee * (1 - def);
+    } else if(state.goal === 'gain') {
+      const surplus = avgSym > 7 ? 0.05 : 0.10;
+      kcal = tdee * (1 + surplus);
+    } else {
+      kcal = tdee;
+    }
+    const minKcal = state.sex === 'M' ? 1500 : 1200;
+    kcal = Math.max(kcal, minKcal);
+
+    // Protein from IBW and user-defined g/kg
+    const protG = Math.round(ibwKg * protPerKg);
+    const protKcal = protG * 4;
+
+    // Carb ceiling by depth
+    let carbMax;
+    if(state.kd === 'light')       carbMax = 50;
+    else if(state.kd === 'medium') carbMax = 30;
+    else                           carbMax = 20;
+
+    // Net carbs: percentage-based but hard-capped
+    let carbPct;
+    if(state.kd === 'light')       carbPct = 0.05;
+    else if(state.kd === 'medium') carbPct = 0.03;
+    else                           carbPct = 0.02;
+    const carbG = Math.round(Math.min((kcal * carbPct) / 4, carbMax));
+    const carbKcal = carbG * 4;
+
+    // Fat fills remaining calories
+    const fatKcal = Math.max(kcal - protKcal - carbKcal, 0);
+    const fatG = Math.round(fatKcal / 9);
+
+    // Percentages for bar display
+    const totalKcal = fatKcal + protKcal + carbKcal;
+    const fPct  = Math.round((fatKcal / totalKcal) * 100);
+    const prPct = Math.round((protKcal / totalKcal) * 100);
+    const cPct  = Math.round((carbKcal / totalKcal) * 100);
+
+    // ── Render ──
+    document.getElementById('r-bmi').textContent    = bmi.toFixed(1);
+    document.getElementById('r-whr').textContent    = whr.toFixed(2);
+    document.getElementById('r-bmr').textContent    = Math.round(bmr);
+    document.getElementById('r-target').textContent = Math.round(kcal);
+
+    document.getElementById('bar-fat').style.width  = fPct + '%';
+    document.getElementById('bar-fat').textContent  = fPct + '%';
+    document.getElementById('bar-prot').style.width = prPct + '%';
+    document.getElementById('bar-prot').textContent = prPct + '%';
+    document.getElementById('bar-carb').style.width = cPct + '%';
+    document.getElementById('bar-carb').textContent = cPct + '%';
+
+    document.getElementById('g-fat').textContent       = fatG + 'g';
+    document.getElementById('g-fat-kcal').textContent  = Math.round(fatKcal) + ' kcal';
+    document.getElementById('g-prot').textContent      = protG + 'g';
+    document.getElementById('g-prot-kcal').textContent = Math.round(protKcal) + ' kcal';
+    document.getElementById('g-carb').textContent      = carbG + 'g';
+    document.getElementById('g-carb-max').textContent  = 'max ' + carbMax + 'g/day';
+
+    const depthLabels = { light:'Light Ketosis · 1.0–1.5 mmol/L BHB', medium:'Medium Ketosis · 1.5–3.0 mmol/L BHB', deep:'Deep Therapeutic Ketosis · 3.0–5.0 mmol/L BHB' };
+    const depthPill   = document.getElementById('depth-pill');
+    depthPill.innerHTML = `<div class="depth-pill ${state.kd}"><span class="depth-dot"></span>${depthLabels[state.kd]}</div>`;
+
+    const goalLabel = { maintain:'Maintenance', loss:'Weight Loss', gain:'Weight Gain' }[state.goal];
+    const htDisplay = `${ftVal}′${inVal}″`;
+    document.getElementById('res-sub').textContent =
+      `${state.sex==='M'?'Male':'Female'} · Age ${age} · ${htDisplay} · ${wtLbs} lbs · ${goalLabel} · Generated ${new Date().toLocaleDateString()}`;
+
+    // ── Clinical Notes ──
+    const notes = [];
+
+    // Symptom note
+    if(avgSym > 7)
+      notes.push(`High symptom burden (avg ${avgSym.toFixed(1)}/10) — conservative caloric adjustment applied to minimize cortisol-driven metabolic stress during keto-adaptation. Monitor closely in weeks 1–3.`);
+    else if(avgSym > 4)
+      notes.push(`Moderate symptom burden (avg ${avgSym.toFixed(1)}/10) — standard caloric adjustment applied. Assess energy and mood weekly; adjust protocol if psychiatric symptoms worsen during adaptation.`);
+    else
+      notes.push(`Lower symptom burden (avg ${avgSym.toFixed(1)}/10) — keto-adaptation typically faster in lower-severity presentations; BHB may reach target range within 3–5 days.`);
+
+    // IBW / protein note
+    notes.push(`Ideal body weight (Devine formula): ${ibwLbs} lbs (${ibwKg.toFixed(1)} kg). Protein set at ${protPerKg.toFixed(1)} g/kg IBW = ${protG}g/day — fat adjusted to fill remaining caloric target after protein and carbs are fixed.`);
+
+    // Goal note
+    if(state.goal === 'loss') {
+      const defPct = avgSym > 7 ? 10 : avgSym > 4 ? 15 : 20;
+      notes.push(`Weight-loss phase (${defPct}% deficit): reassess every 3–4 weeks. If stall exceeds 3 weeks, reduce by 50–75 kcal/day or increase activity. Do not reduce below ${minKcal} kcal/day.`);
+    } else if(state.goal === 'gain') {
+      const surplusPct = avgSym > 7 ? 5 : 10;
+      notes.push(`Weight-gain phase (${surplusPct}% surplus): target slow, lean mass accrual of 0.25–0.5 lbs/week. Reassess body composition every 4–6 weeks; adjust surplus if fat gain exceeds lean gain.`);
+    }
+
+    // WHR note
+    const whrHigh = (state.sex === 'M' && whr > 0.90) || (state.sex === 'F' && whr > 0.85);
+    if(whrHigh)
+      notes.push(`Elevated waist-hip ratio (${whr.toFixed(2)}) indicates central adiposity — a key driver of neuroinflammation. Medium or deep ketosis strongly favored for this metabolic phenotype.`);
+
+    // BMI note
+    if(bmi >= 30)
+      notes.push(`BMI ${bmi.toFixed(1)} (obese range). Consider DEXA body composition at baseline and 12 weeks to track lean mass vs. fat loss ratio.`);
+    else if(bmi < 18.5)
+      notes.push(`BMI ${bmi.toFixed(1)} is below normal weight. Weight-loss goal not recommended — reassess primary goal. Screen for restrictive eating behaviors before initiating protocol.`);
+
+    // Depth note
+    if(state.kd === 'deep')
+      notes.push(`Deep ketosis: BHB target 3.0–5.0 mmol/L. Supplement sodium 3–5g/day, potassium 2–3g/day, magnesium glycinate 300–400mg/day. Check electrolytes and lipid panel at 6–8 weeks. Therapeutic benefit for severe mood and psychotic-spectrum presentations supported by emerging evidence.`);
+    else if(state.kd === 'light')
+      notes.push(`Light ketosis: verify with home BHB meter (target >1.0 mmol/L). If symptom response is insufficient at 4–6 weeks, consider advancing to medium depth protocol.`);
+
+    notes.push(`Distribute protein (${protG}g) across 3+ meals to optimize leucine threshold for muscle protein synthesis. Prioritize complete animal proteins: eggs, fatty fish, red meat, poultry.`);
+
+    const nb = document.getElementById('notes-body');
+    nb.innerHTML = notes.map(n => `<div class="note-line">${n}</div>`).join('');
+
+    const res = document.getElementById('results');
+    res.className = 'show';
+    setTimeout(() => res.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+  }
+</script>
+</body>
+</html>
