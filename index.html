@@ -603,6 +603,10 @@
           <span id="meal-print-date">—</span>
         </div>
       </div>
+
+      <!-- Print-only recipe pages -->
+      <div class="recipe-pages" id="recipe-pages"></div>
+
     </div>
   </div>
 
@@ -900,7 +904,7 @@ Respond ONLY with valid JSON. No preamble, no markdown, no explanation. Each mea
 Return all 7 days (Monday through Sunday). Every meal must have a complete recipe field.`;
 
     try {
-      const response = await fetch('https://api.anthropic.com/v1/messages', {
+      const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
