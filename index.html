@@ -8,170 +8,43 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --bg: #0d0f0e;
-    --bg2: #131614;
-    --bg3: #191c1a;
-    --bg4: #1f2420;
-    --border: rgba(255,255,255,0.07);
-    --border2: rgba(255,255,255,0.12);
-    --text: #e8ede9;
-    --text2: #8a9a8c;
-    --text3: #5a6b5c;
-    --accent: #4a9e6b;
-    --accent2: #3a7d54;
-    --accent-glow: rgba(74,158,107,0.15);
-    --amber: #c4883a;
-    --amber-bg: rgba(196,136,58,0.12);
-    --coral: #c45a3a;
-    --coral-bg: rgba(196,90,58,0.12);
-    --teal: #3a9e8a;
-    --teal-bg: rgba(58,158,138,0.12);
-    --gold: #b8a060;
-    --radius: 8px;
-    --radius-lg: 14px;
+    --bg: #0d0f0e; --bg2: #131614; --bg3: #191c1a; --bg4: #1f2420;
+    --border: rgba(255,255,255,0.07); --border2: rgba(255,255,255,0.12);
+    --text: #e8ede9; --text2: #8a9a8c; --text3: #5a6b5c;
+    --accent: #4a9e6b; --accent2: #3a7d54; --accent-glow: rgba(74,158,107,0.15);
+    --amber: #c4883a; --amber-bg: rgba(196,136,58,0.12);
+    --coral: #c45a3a; --coral-bg: rgba(196,90,58,0.12);
+    --teal: #3a9e8a; --teal-bg: rgba(58,158,138,0.12);
+    --radius: 8px; --radius-lg: 14px;
   }
-
   html { scroll-behavior: smooth; }
+  body { font-family: 'JetBrains Mono', monospace; background: var(--bg); color: var(--text); min-height: 100vh; line-height: 1.6; }
 
-  body {
-    font-family: 'JetBrains Mono', monospace;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    line-height: 1.6;
-  }
+  /* HEADER */
+  .site-header { border-bottom: 1px solid var(--border); padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 64px; position: sticky; top: 0; background: rgba(13,15,14,0.92); backdrop-filter: blur(12px); z-index: 100; }
+  .logo { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 400; color: var(--text); letter-spacing: 0.02em; display: flex; align-items: center; gap: 10px; }
+  .logo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 10px var(--accent); flex-shrink: 0; }
+  .header-tag { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); border: 1px solid var(--border2); padding: 4px 10px; border-radius: 100px; }
 
-  /* ── HEADER ── */
-  .site-header {
-    border-bottom: 1px solid var(--border);
-    padding: 0 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 64px;
-    position: sticky;
-    top: 0;
-    background: rgba(13,15,14,0.92);
-    backdrop-filter: blur(12px);
-    z-index: 100;
-  }
-  .logo {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.35rem;
-    font-weight: 400;
-    color: var(--text);
-    letter-spacing: 0.02em;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .logo-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 10px var(--accent);
-    flex-shrink: 0;
-  }
-  .header-tag {
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--text3);
-    border: 1px solid var(--border2);
-    padding: 4px 10px;
-    border-radius: 100px;
-  }
+  /* HERO */
+  .hero { padding: 5rem 2rem 3rem; max-width: 760px; margin: 0 auto; text-align: center; }
+  .hero-eyebrow { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); margin-bottom: 1.25rem; }
+  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 300; line-height: 1.15; color: var(--text); margin-bottom: 1rem; letter-spacing: -0.01em; }
+  .hero h1 em { font-style: italic; color: var(--accent); }
+  .hero p { font-size: 13px; color: var(--text2); max-width: 520px; margin: 0 auto; line-height: 1.8; }
 
-  /* ── HERO ── */
-  .hero {
-    padding: 5rem 2rem 3rem;
-    max-width: 760px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  .hero-eyebrow {
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 1.25rem;
-  }
-  .hero h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.4rem, 5vw, 3.8rem);
-    font-weight: 300;
-    line-height: 1.15;
-    color: var(--text);
-    margin-bottom: 1rem;
-    letter-spacing: -0.01em;
-  }
-  .hero h1 em {
-    font-style: italic;
-    color: var(--accent);
-  }
-  .hero p {
-    font-size: 13px;
-    color: var(--text2);
-    max-width: 520px;
-    margin: 0 auto;
-    line-height: 1.8;
-  }
+  /* MAIN */
+  .main { max-width: 900px; margin: 0 auto; padding: 0 2rem 6rem; }
 
-  /* ── MAIN LAYOUT ── */
-  .main {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 2rem 6rem;
-  }
+  /* CARD */
+  .card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 2rem; margin-bottom: 1.5rem; position: relative; overflow: hidden; }
+  .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--border2), transparent); }
+  .card-title { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--text3); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 10px; }
+  .card-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .card-num { width: 22px; height: 22px; border: 1px solid var(--border2); border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; color: var(--accent); flex-shrink: 0; }
 
-  /* ── CARD ── */
-  .card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 2rem;
-    margin-bottom: 1.5rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--border2), transparent);
-  }
-  .card-title {
-    font-size: 10px;
-    letter-spacing: 2.5px;
-    text-transform: uppercase;
-    color: var(--text3);
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .card-title::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-  .card-num {
-    width: 22px; height: 22px;
-    border: 1px solid var(--border2);
-    border-radius: 50%;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 10px;
-    color: var(--accent);
-    flex-shrink: 0;
-  }
-
-  /* ── FORM GRID ── */
+  /* GRIDS */
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
   .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; }
   @media(max-width: 580px) {
@@ -182,358 +55,261 @@
     .card { padding: 1.5rem; }
   }
 
-  /* ── FIELD ── */
+  /* FIELD */
   .field { display: flex; flex-direction: column; gap: 7px; }
-  .field label {
-    font-size: 11px;
-    color: var(--text3);
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-  }
-  .field input, .field select {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 10px 12px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 14px;
-    color: var(--text);
-    outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    width: 100%;
-    -webkit-appearance: none;
-  }
-  .field input:focus, .field select:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px var(--accent-glow);
-  }
+  .field label { font-size: 11px; color: var(--text3); letter-spacing: 0.5px; text-transform: uppercase; }
+  .field input, .field select { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 12px; font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--text); outline: none; transition: border-color 0.2s, box-shadow 0.2s; width: 100%; -webkit-appearance: none; }
+  .field input:focus, .field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
   .field input::placeholder { color: var(--text3); font-size: 12px; }
   .field select option { background: var(--bg3); }
-  .field .hint {
-    font-size: 10px;
-    color: var(--text3);
-    line-height: 1.5;
-  }
-
-  /* Height feet + inches row */
+  .field .hint { font-size: 10px; color: var(--text3); line-height: 1.5; }
   .ht-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 
-  /* ── SEGMENTED ── */
+  /* SEGMENTED */
   .seg { display: flex; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-  .seg button {
-    flex: 1;
-    padding: 10px 8px;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    font-weight: 300;
-    background: transparent;
-    border: none;
-    border-right: 1px solid var(--border);
-    color: var(--text3);
-    cursor: pointer;
-    transition: all 0.18s;
-    letter-spacing: 0.3px;
-  }
+  .seg button { flex: 1; padding: 10px 8px; font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 300; background: transparent; border: none; border-right: 1px solid var(--border); color: var(--text3); cursor: pointer; transition: all 0.18s; letter-spacing: 0.3px; }
   .seg button:last-child { border-right: none; }
   .seg button:hover { color: var(--text2); background: var(--bg3); }
-  .seg button.on {
-    background: var(--accent);
-    color: #fff;
-    font-weight: 400;
-  }
-  .seg button.on-amber { background: var(--amber); color: #fff; font-weight: 400; }
-  .seg button.on-coral { background: var(--coral); color: #fff; font-weight: 400; }
+  .seg button.on { background: var(--accent); color: #fff; font-weight: 400; }
 
-  /* ── SLIDER ── */
+  /* SLIDERS */
   .slider-group { display: flex; flex-direction: column; gap: 6px; }
   .slider-label-row { display: flex; justify-content: space-between; align-items: baseline; }
   .slider-label { font-size: 11px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; }
   .slider-val { font-size: 14px; font-weight: 500; color: var(--text); }
-  input[type=range] {
-    -webkit-appearance: none;
-    width: 100%;
-    height: 3px;
-    background: var(--bg4);
-    border-radius: 2px;
-    outline: none;
-    cursor: pointer;
-  }
-  input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 16px; height: 16px;
-    border-radius: 50%;
-    background: var(--accent);
-    border: 2px solid var(--bg);
-    box-shadow: 0 0 8px var(--accent-glow);
-    cursor: pointer;
-    transition: transform 0.1s;
-  }
+  input[type=range] { -webkit-appearance: none; width: 100%; height: 3px; background: var(--bg4); border-radius: 2px; outline: none; cursor: pointer; }
+  input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); box-shadow: 0 0 8px var(--accent-glow); cursor: pointer; transition: transform 0.1s; }
   input[type=range]::-webkit-slider-thumb:active { transform: scale(1.25); }
-  input[type=range]::-moz-range-thumb {
-    width: 16px; height: 16px;
-    border-radius: 50%;
-    background: var(--accent);
-    border: 2px solid var(--bg);
-    cursor: pointer;
-  }
+  input[type=range]::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%; background: var(--accent); border: 2px solid var(--bg); cursor: pointer; }
   .sym-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
   @media(max-width: 500px) { .sym-grid { grid-template-columns: 1fr; } }
   .scale-ends { display: flex; justify-content: space-between; font-size: 9px; color: var(--text3); letter-spacing: 0.3px; margin-top: 2px; }
 
-  /* ── BUTTON ── */
-  .calc-btn {
-    width: 100%;
-    padding: 16px 32px;
-    background: var(--accent);
-    border: none;
-    border-radius: var(--radius-lg);
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.25rem;
-    font-weight: 400;
-    font-style: italic;
-    color: #fff;
-    cursor: pointer;
-    letter-spacing: 0.02em;
-    transition: all 0.2s;
-    margin-top: 0.5rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .calc-btn::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent);
-    pointer-events: none;
-  }
+  /* BUTTONS */
+  .calc-btn { width: 100%; padding: 16px 32px; background: var(--accent); border: none; border-radius: var(--radius-lg); font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 400; font-style: italic; color: #fff; cursor: pointer; letter-spacing: 0.02em; transition: all 0.2s; margin-top: 0.5rem; position: relative; overflow: hidden; }
+  .calc-btn::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent); pointer-events: none; }
   .calc-btn:hover { background: var(--accent2); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(74,158,107,0.25); }
   .calc-btn:active { transform: translateY(0); }
 
-  /* ── RESULTS ── */
+  .print-btn { display: flex; align-items: center; gap: 10px; margin-top: 1.25rem; padding: 13px 24px; background: transparent; border: 1px solid var(--border2); border-radius: var(--radius-lg); font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text2); cursor: pointer; transition: all 0.2s; width: 100%; justify-content: center; letter-spacing: 0.5px; }
+  .print-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+
+  /* RESULTS */
   #results { display: none; animation: fadeUp 0.4s ease forwards; }
   #results.show { display: block; }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-
-  .results-header {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    font-weight: 300;
-    color: var(--text);
-    margin-bottom: 0.5rem;
-    letter-spacing: -0.01em;
-  }
+  .results-header { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--text); margin-bottom: 0.5rem; letter-spacing: -0.01em; }
   .results-sub { font-size: 12px; color: var(--text3); margin-bottom: 2rem; }
 
-  /* metrics row */
+  /* METRICS */
   .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 1.5rem; }
   @media(max-width: 600px) { .metrics { grid-template-columns: repeat(2, 1fr); } }
-  .metric-box {
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1rem 0.75rem;
-    text-align: center;
-  }
-  .metric-val {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    font-weight: 300;
-    color: var(--text);
-    line-height: 1;
-  }
+  .metric-box { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 0.75rem; text-align: center; }
+  .metric-val { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 300; color: var(--text); line-height: 1; }
   .metric-lbl { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text3); margin-top: 6px; }
   .metric-box.accent-box { border-color: rgba(74,158,107,0.3); background: var(--accent-glow); }
   .metric-box.accent-box .metric-val { color: var(--accent); }
 
-  /* macro bar */
+  /* MACRO BAR */
   .macro-section { margin-bottom: 1.5rem; }
-  .macro-track {
-    height: 36px;
-    border-radius: var(--radius);
-    overflow: hidden;
-    display: flex;
-    margin: 12px 0 10px;
-  }
-  .bar-seg {
-    display: flex; align-items: center; justify-content: center;
-    font-size: 11px; font-weight: 500; color: #fff;
-    transition: width 0.5s cubic-bezier(.4,0,.2,1);
-    min-width: 0;
-  }
+  .macro-track { height: 36px; border-radius: var(--radius); overflow: hidden; display: flex; margin: 12px 0 10px; }
+  .bar-seg { display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; color: #fff; transition: width 0.5s cubic-bezier(.4,0,.2,1); min-width: 0; }
   .bar-fat { background: var(--accent); }
   .bar-prot { background: var(--amber); }
   .bar-carb { background: var(--coral); }
   .macro-legend { display: flex; gap: 18px; flex-wrap: wrap; }
   .leg { display: flex; align-items: center; gap: 7px; font-size: 12px; color: var(--text2); }
   .leg-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
-
-  /* gram cards */
   .gram-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 1.25rem; }
   @media(max-width: 500px) { .gram-cards { grid-template-columns: 1fr; } }
-  .gram-card {
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 1.25rem;
-    text-align: center;
-    background: var(--bg3);
-  }
-  .gram-val {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2.5rem;
-    font-weight: 300;
-    line-height: 1;
-  }
+  .gram-card { border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; text-align: center; background: var(--bg3); }
+  .gram-val { font-family: 'Cormorant Garamond', serif; font-size: 2.5rem; font-weight: 300; line-height: 1; }
   .gram-val.fat { color: var(--accent); }
   .gram-val.prot { color: var(--amber); }
   .gram-val.carb { color: var(--coral); }
   .gram-lbl { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--text3); margin-top: 6px; }
   .gram-sub { font-size: 10px; color: var(--text3); margin-top: 2px; }
 
-  /* depth badge */
-  .depth-pill {
-    display: inline-flex; align-items: center; gap: 7px;
-    padding: 5px 14px;
-    border-radius: 100px;
-    font-size: 11px;
-    font-weight: 400;
-    letter-spacing: 0.5px;
-    margin-bottom: 1.5rem;
-    border: 1px solid;
-  }
+  /* DEPTH PILL */
+  .depth-pill { display: inline-flex; align-items: center; gap: 7px; padding: 5px 14px; border-radius: 100px; font-size: 11px; font-weight: 400; letter-spacing: 0.5px; margin-bottom: 1.5rem; border: 1px solid; }
   .depth-pill.light { background: var(--amber-bg); color: var(--amber); border-color: rgba(196,136,58,0.25); }
   .depth-pill.medium { background: var(--teal-bg); color: var(--teal); border-color: rgba(58,158,138,0.25); }
   .depth-pill.deep { background: var(--accent-glow); color: var(--accent); border-color: rgba(74,158,107,0.25); }
   .depth-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
 
-  /* clinical notes */
-  .notes-card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-left: 3px solid var(--accent);
-    border-radius: var(--radius);
-    padding: 1.25rem 1.5rem;
-    margin-top: 1.25rem;
-  }
+  /* NOTES */
+  .notes-card { background: var(--bg2); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: var(--radius); padding: 1.25rem 1.5rem; margin-top: 1.25rem; }
   .notes-title { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; }
   .note-line { font-size: 12px; color: var(--text2); line-height: 1.8; padding: 4px 0; border-bottom: 1px solid var(--border); }
   .note-line:last-child { border-bottom: none; }
   .note-line::before { content: '→  '; color: var(--text3); }
 
-  /* warning card */
-  .disclaimer {
-    background: rgba(196,136,58,0.06);
-    border: 1px solid rgba(196,136,58,0.18);
-    border-radius: var(--radius);
-    padding: 1rem 1.25rem;
-    font-size: 11px;
-    color: var(--text3);
-    line-height: 1.7;
-    margin-top: 1rem;
-  }
+  /* DISCLAIMER */
+  .disclaimer { background: rgba(196,136,58,0.06); border: 1px solid rgba(196,136,58,0.18); border-radius: var(--radius); padding: 1rem 1.25rem; font-size: 11px; color: var(--text3); line-height: 1.7; margin-top: 1rem; }
   .disclaimer strong { color: var(--amber); font-weight: 500; }
 
-  /* footer */
-  .site-footer {
-    border-top: 1px solid var(--border);
-    padding: 2rem;
-    text-align: center;
-    font-size: 11px;
-    color: var(--text3);
-    letter-spacing: 0.5px;
-  }
-  .divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--border2), transparent);
-    margin: 2rem 0;
-  }
+  /* FOOTER */
+  .site-footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; font-size: 11px; color: var(--text3); letter-spacing: 0.5px; }
+  .divider { height: 1px; background: linear-gradient(90deg, transparent, var(--border2), transparent); margin: 2rem 0; }
 
-  /* ── PRINT BUTTON ── */
-  .print-btn {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 1.25rem;
-    padding: 13px 24px;
-    background: transparent;
-    border: 1px solid var(--border2);
-    border-radius: var(--radius-lg);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px;
-    color: var(--text2);
-    cursor: pointer;
-    transition: all 0.2s;
-    width: 100%;
-    justify-content: center;
-    letter-spacing: 0.5px;
-  }
-  .print-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
-  .print-btn svg { flex-shrink: 0; }
+  /* ── MEAL PLANNER ── */
+  #meal-section { display: none; }
+  #meal-section.show { display: block; }
+
+  .allergy-input-row { display: flex; gap: 8px; margin-bottom: 10px; }
+  .allergy-input-row input { flex: 1; background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: 9px 12px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--text); outline: none; transition: border-color 0.2s; }
+  .allergy-input-row input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+  .add-allergy-btn { padding: 9px 16px; background: var(--bg3); border: 1px solid var(--border2); border-radius: var(--radius); font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent); cursor: pointer; transition: all 0.15s; white-space: nowrap; }
+  .add-allergy-btn:hover { background: var(--accent-glow); border-color: var(--accent); }
+  .allergy-tags { display: flex; flex-wrap: wrap; gap: 7px; min-height: 28px; }
+  .allergy-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--coral-bg); border: 1px solid rgba(196,90,58,0.25); color: var(--coral); border-radius: 100px; padding: 4px 10px; font-size: 11px; }
+  .allergy-tag button { background: none; border: none; color: var(--coral); cursor: pointer; font-size: 13px; line-height: 1; padding: 0; opacity: 0.7; }
+  .allergy-tag button:hover { opacity: 1; }
+  .common-allergens { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .allergen-chip { padding: 4px 10px; background: var(--bg3); border: 1px solid var(--border2); border-radius: 100px; font-size: 10px; color: var(--text3); cursor: pointer; transition: all 0.15s; }
+  .allergen-chip:hover { border-color: var(--coral); color: var(--coral); background: var(--coral-bg); }
+  .allergen-chip.added { border-color: rgba(196,90,58,0.25); color: var(--coral); background: var(--coral-bg); opacity: 0.5; pointer-events: none; }
+
+  .gen-meal-btn { width: 100%; padding: 16px 32px; background: var(--teal); border: none; border-radius: var(--radius-lg); font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 300; font-style: italic; color: #fff; cursor: pointer; transition: all 0.2s; margin-top: 0.5rem; }
+  .gen-meal-btn:hover { background: #2e7d6e; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(58,158,138,0.25); }
+  .gen-meal-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  /* MEAL PLAN OUTPUT */
+  #meal-plan-output { display: none; }
+  #meal-plan-output.show { display: block; }
+
+  .meal-plan-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 1.5rem; }
+  .meal-plan-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; }
+
+  .day-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+
+  .day-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .day-header { background: var(--bg3); padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--border); }
+  .day-name { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); font-weight: 500; }
+  .day-macros { font-size: 10px; color: var(--text3); }
+
+  .meals-row { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; }
+  @media(max-width: 650px) { .meals-row { grid-template-columns: 1fr 1fr; } }
+  @media(max-width: 420px) { .meals-row { grid-template-columns: 1fr; } }
+
+  .meal-cell { padding: 12px 14px; border-right: 1px solid var(--border); }
+  .meal-cell:last-child { border-right: none; }
+  .meal-label { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text3); margin-bottom: 6px; }
+  .meal-name { font-size: 12px; color: var(--text); font-weight: 500; margin-bottom: 4px; line-height: 1.4; }
+  .meal-detail { font-size: 10px; color: var(--text3); line-height: 1.5; }
+  .meal-macros { display: flex; gap: 8px; margin-top: 6px; flex-wrap: wrap; }
+  .mmac { font-size: 9px; padding: 2px 6px; border-radius: 4px; }
+  .mmac.f { background: rgba(74,158,107,0.12); color: var(--accent); }
+  .mmac.p { background: rgba(196,136,58,0.12); color: var(--amber); }
+  .mmac.c { background: rgba(196,90,58,0.12); color: var(--coral); }
+
+  /* LOADING STATE */
+  .meal-loading { text-align: center; padding: 3rem 2rem; }
+  .meal-loading-spinner { width: 36px; height: 36px; border: 2px solid var(--border2); border-top-color: var(--teal); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 1rem; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .meal-loading p { font-size: 12px; color: var(--text3); }
+  .meal-loading-steps { font-size: 11px; color: var(--teal); margin-top: 6px; min-height: 18px; }
 
   /* ── PRINT STYLES ── */
   @media print {
-    @page { margin: 1.8cm 1.5cm; size: letter; }
+    @page { margin: 1.5cm 1.4cm; size: letter; }
     * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-    body { background: #fff !important; color: #1a1a1a !important; font-family: 'JetBrains Mono', monospace; font-size: 11px; }
+    body { background: #fff !important; color: #1a1a1a !important; font-size: 10px; }
+
     .site-header, .hero, .card:not(.macro-section),
-    .calc-btn, .print-btn, .site-footer, #results > .divider { display: none !important; }
+    .calc-btn, .print-btn, .gen-meal-btn, .add-allergy-btn,
+    .site-footer, #results > .divider,
+    .allergy-input-row, .common-allergens, .allergy-tags,
+    #meal-section > .card { display: none !important; }
+
     #results { display: block !important; animation: none !important; }
+    #meal-plan-output { display: block !important; }
     .main { max-width: 100%; padding: 0; margin: 0; }
 
-    .print-header { display: flex !important; align-items: center; justify-content: space-between; border-bottom: 2px solid #2a5c3a; padding-bottom: 14px; margin-bottom: 20px; }
-    .print-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 400; color: #2a5c3a; display: flex; align-items: center; gap: 8px; }
-    .print-logo-dot { width: 8px; height: 8px; border-radius: 50%; background: #2a5c3a; display: inline-block; }
+    /* Print header */
+    .print-header { display: flex !important; align-items: center; justify-content: space-between; border-bottom: 2px solid #2a5c3a; padding-bottom: 12px; margin-bottom: 16px; }
+    .print-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: #2a5c3a; display: flex; align-items: center; gap: 8px; }
+    .print-logo-dot { width: 7px; height: 7px; border-radius: 50%; background: #2a5c3a; display: inline-block; }
     .print-meta { font-size: 9px; color: #666; text-align: right; line-height: 1.6; }
 
-    .results-header { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: #1a1a1a; margin-bottom: 4px; }
-    .results-sub { font-size: 10px; color: #666; margin-bottom: 14px; }
-    .depth-pill { border: 1px solid #2a5c3a !important; color: #2a5c3a !important; background: #eaf5ee !important; font-size: 10px; padding: 3px 12px; margin-bottom: 14px; }
+    .results-header { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; color: #1a1a1a; margin-bottom: 3px; }
+    .results-sub { font-size: 9px; color: #666; margin-bottom: 12px; }
+    .depth-pill { border: 1px solid #2a5c3a !important; color: #2a5c3a !important; background: #eaf5ee !important; font-size: 9px; padding: 2px 10px; margin-bottom: 12px; }
 
-    .metrics { display: grid !important; grid-template-columns: repeat(4,1fr) !important; gap: 8px !important; margin-bottom: 14px !important; }
-    .metric-box { background: #f5f7f5 !important; border: 1px solid #d0d8d0 !important; border-radius: 6px !important; padding: 10px 8px !important; text-align: center !important; }
+    .metrics { display: grid !important; grid-template-columns: repeat(4,1fr) !important; gap: 6px !important; margin-bottom: 12px !important; }
+    .metric-box { background: #f5f7f5 !important; border: 1px solid #d0d8d0 !important; border-radius: 5px !important; padding: 8px !important; text-align: center !important; }
     .metric-box.accent-box { background: #eaf5ee !important; border-color: #2a5c3a !important; }
-    .metric-val { font-family: 'Cormorant Garamond', serif !important; font-size: 1.5rem !important; color: #1a1a1a !important; line-height: 1 !important; }
+    .metric-val { font-family: 'Cormorant Garamond', serif !important; font-size: 1.4rem !important; color: #1a1a1a !important; line-height: 1 !important; }
     .metric-box.accent-box .metric-val { color: #2a5c3a !important; }
-    .metric-lbl { font-size: 8px !important; color: #666 !important; margin-top: 4px !important; }
+    .metric-lbl { font-size: 7px !important; color: #666 !important; margin-top: 3px !important; }
 
-    .macro-section { background: #f5f7f5 !important; border: 1px solid #d0d8d0 !important; border-radius: 8px !important; padding: 14px !important; margin-bottom: 14px !important; display: block !important; }
-    .card-title { color: #666 !important; font-size: 9px !important; margin-bottom: 10px !important; }
+    .macro-section { background: #f5f7f5 !important; border: 1px solid #d0d8d0 !important; border-radius: 7px !important; padding: 12px !important; margin-bottom: 12px !important; display: block !important; }
+    .card-title { color: #666 !important; font-size: 8px !important; margin-bottom: 8px !important; }
     .card-title::after { background: #d0d8d0 !important; }
-    .macro-track { height: 26px !important; border-radius: 6px !important; margin: 8px 0 !important; }
-    .bar-fat  { background: #2a5c3a !important; }
+    .macro-track { height: 22px !important; border-radius: 5px !important; margin: 6px 0 !important; }
+    .bar-fat { background: #2a5c3a !important; }
     .bar-prot { background: #c4883a !important; }
     .bar-carb { background: #c45a3a !important; }
-    .bar-seg  { font-size: 10px !important; color: #fff !important; }
-    .macro-legend { gap: 14px !important; }
-    .leg { font-size: 10px !important; color: #444 !important; }
-    .leg-dot { width: 7px !important; height: 7px !important; }
-    .gram-cards { display: grid !important; grid-template-columns: 1fr 1fr 1fr !important; gap: 8px !important; margin-top: 10px !important; }
-    .gram-card { border: 1px solid #d0d8d0 !important; background: #fff !important; border-radius: 6px !important; padding: 10px !important; }
-    .gram-val { font-size: 1.7rem !important; }
-    .gram-val.fat  { color: #2a5c3a !important; }
+    .bar-seg { font-size: 9px !important; color: #fff !important; }
+    .macro-legend { gap: 12px !important; }
+    .leg { font-size: 9px !important; color: #444 !important; }
+    .leg-dot { width: 6px !important; height: 6px !important; }
+    .gram-cards { display: grid !important; grid-template-columns: 1fr 1fr 1fr !important; gap: 7px !important; margin-top: 8px !important; }
+    .gram-card { border: 1px solid #d0d8d0 !important; background: #fff !important; border-radius: 5px !important; padding: 8px !important; }
+    .gram-val { font-size: 1.5rem !important; }
+    .gram-val.fat { color: #2a5c3a !important; }
     .gram-val.prot { color: #c4883a !important; }
     .gram-val.carb { color: #c45a3a !important; }
-    .gram-lbl { font-size: 8px !important; color: #666 !important; }
-    .gram-sub { font-size: 8px !important; color: #888 !important; }
+    .gram-lbl { font-size: 7px !important; color: #666 !important; }
+    .gram-sub { font-size: 7px !important; color: #888 !important; }
 
-    .print-symptoms { display: grid !important; grid-template-columns: 1fr 1fr 1fr !important; gap: 6px !important; margin-bottom: 14px !important; }
-    .print-sym-item { background: #f5f7f5; border: 1px solid #d0d8d0; border-radius: 6px; padding: 7px 10px; display: flex; justify-content: space-between; align-items: center; }
-    .print-sym-name { font-size: 9px; color: #555; }
-    .print-sym-val  { font-size: 13px; font-weight: 500; color: #1a1a1a; }
+    .print-symptoms { display: grid !important; grid-template-columns: 1fr 1fr 1fr !important; gap: 5px !important; margin-bottom: 12px !important; }
+    .print-sym-item { background: #f5f7f5; border: 1px solid #d0d8d0; border-radius: 5px; padding: 6px 9px; display: flex; justify-content: space-between; align-items: center; }
+    .print-sym-name { font-size: 8px; color: #555; }
+    .print-sym-val { font-size: 12px; font-weight: 500; color: #1a1a1a; }
 
-    .notes-card { background: #f5f7f5 !important; border: 1px solid #d0d8d0 !important; border-left: 3px solid #2a5c3a !important; border-radius: 6px !important; padding: 12px 14px !important; margin-top: 12px !important; page-break-inside: avoid; }
-    .notes-title { color: #2a5c3a !important; font-size: 9px !important; margin-bottom: 8px !important; }
-    .note-line { font-size: 10px !important; color: #333 !important; line-height: 1.7 !important; padding: 3px 0 !important; border-bottom: 1px solid #e0e0e0 !important; }
+    .notes-card { background: #f5f7f5 !important; border: 1px solid #d0d8d0 !important; border-left: 3px solid #2a5c3a !important; border-radius: 5px !important; padding: 10px 12px !important; margin-top: 10px !important; page-break-inside: avoid; }
+    .notes-title { color: #2a5c3a !important; font-size: 8px !important; margin-bottom: 7px !important; }
+    .note-line { font-size: 9px !important; color: #333 !important; line-height: 1.6 !important; padding: 2px 0 !important; border-bottom: 1px solid #e0e0e0 !important; }
     .note-line::before { color: #888 !important; }
 
-    .disclaimer { background: #fffbf0 !important; border: 1px solid #e8d5a0 !important; border-radius: 6px !important; padding: 8px 12px !important; font-size: 9px !important; color: #666 !important; margin-top: 10px !important; }
+    .disclaimer { background: #fffbf0 !important; border: 1px solid #e8d5a0 !important; border-radius: 5px !important; padding: 7px 10px !important; font-size: 8px !important; color: #666 !important; margin-top: 8px !important; }
     .disclaimer strong { color: #c4883a !important; }
 
-    .print-footer { display: flex !important; justify-content: space-between; margin-top: 14px; padding-top: 10px; border-top: 1px solid #d0d8d0; font-size: 8px; color: #999; }
+    /* Meal plan print */
+    .meal-plan-divider { display: block !important; page-break-before: always; height: 1px; }
+    .meal-plan-print-header { display: flex !important; align-items: center; justify-content: space-between; border-bottom: 2px solid #2a7a6a; padding-bottom: 10px; margin-bottom: 14px; }
+    .meal-plan-print-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 300; color: #2a7a6a; }
+    .meal-plan-print-sub { font-size: 8px; color: #666; text-align: right; }
+    .meal-plan-header { display: none !important; }
+    .meal-plan-title { display: none !important; }
+
+    .day-grid { display: grid !important; grid-template-columns: 1fr !important; gap: 10px !important; }
+    .day-card { background: #f9faf9 !important; border: 1px solid #d0d8d0 !important; border-radius: 7px !important; page-break-inside: avoid; }
+    .day-header { background: #eaf5ee !important; padding: 7px 14px !important; border-bottom: 1px solid #d0d8d0 !important; }
+    .day-name { font-size: 9px !important; color: #2a5c3a !important; }
+    .day-macros { font-size: 8px !important; color: #666 !important; }
+    .meals-row { display: grid !important; grid-template-columns: 1fr 1fr 1fr 1fr !important; }
+    .meal-cell { padding: 8px 10px !important; border-right: 1px solid #e0e0e0 !important; }
+    .meal-label { font-size: 7px !important; color: #888 !important; margin-bottom: 4px !important; }
+    .meal-name { font-size: 10px !important; color: #1a1a1a !important; margin-bottom: 3px !important; }
+    .meal-detail { font-size: 8px !important; color: #555 !important; }
+    .meal-macros { gap: 4px !important; margin-top: 4px !important; }
+    .mmac { font-size: 7px !important; padding: 1px 4px !important; }
+    .mmac.f { background: #eaf5ee !important; color: #2a5c3a !important; }
+    .mmac.p { background: #fdf3e3 !important; color: #c4883a !important; }
+    .mmac.c { background: #fdf0ec !important; color: #c45a3a !important; }
+
+    .print-footer { display: flex !important; justify-content: space-between; margin-top: 14px; padding-top: 8px; border-top: 1px solid #d0d8d0; font-size: 7px; color: #999; }
+    .meal-print-footer { display: flex !important; justify-content: space-between; margin-top: 10px; padding-top: 8px; border-top: 1px solid #d0d8d0; font-size: 7px; color: #999; }
+
+    .print-exclusions { display: block !important; font-size: 8px; color: #c45a3a; margin-bottom: 10px; }
   }
 
-  /* Hide print-only elements on screen */
-  .print-header, .print-symptoms, .print-footer { display: none; }
-
+  /* Screen-only hide */
+  .print-header, .print-symptoms, .print-footer,
+  .meal-plan-divider, .meal-plan-print-header, .meal-plan-print-sub,
+  .meal-print-footer, .print-exclusions { display: none; }
 </style>
 </head>
 <body>
@@ -546,12 +322,12 @@
 <section class="hero">
   <div class="hero-eyebrow">Metabolic Psychiatry</div>
   <h1>Ketogenic Diet<br><em>Clinical Calculator</em></h1>
-  <p>Personalized calorie targets and therapeutic macro splits based on client biometrics, symptom burden, and ketogenic depth protocol.</p>
+  <p>Personalized calorie targets, therapeutic macro splits, and AI-generated 7-day meal plans based on client biometrics, symptom burden, and ketogenic protocol.</p>
 </section>
 
 <main class="main">
 
-  <!-- CARD 1: Demographics -->
+  <!-- CARD 1 -->
   <div class="card">
     <div class="card-title"><span class="card-num">1</span> Client Demographics</div>
     <div class="grid-3" style="margin-bottom:1.25rem">
@@ -591,7 +367,7 @@
     </div>
   </div>
 
-  <!-- CARD 2: Body Composition -->
+  <!-- CARD 2 -->
   <div class="card">
     <div class="card-title"><span class="card-num">2</span> Body Composition</div>
     <div class="grid-2">
@@ -608,58 +384,40 @@
     </div>
   </div>
 
-  <!-- CARD 3: Symptom Severity -->
+  <!-- CARD 3 -->
   <div class="card">
     <div class="card-title"><span class="card-num">3</span> Symptom Severity <span style="font-size:10px;color:var(--text3);margin-left:4px">(0 = none · 10 = severe)</span></div>
     <div class="sym-grid">
       <div class="slider-group">
-        <div class="slider-label-row">
-          <span class="slider-label">Mood / Depression</span>
-          <span class="slider-val" id="v1">5</span>
-        </div>
+        <div class="slider-label-row"><span class="slider-label">Mood / Depression</span><span class="slider-val" id="v1">5</span></div>
         <input type="range" min="0" max="10" value="5" step="1" id="s1" oninput="sv('v1',this.value)">
       </div>
       <div class="slider-group">
-        <div class="slider-label-row">
-          <span class="slider-label">Anxiety</span>
-          <span class="slider-val" id="v2">5</span>
-        </div>
+        <div class="slider-label-row"><span class="slider-label">Anxiety</span><span class="slider-val" id="v2">5</span></div>
         <input type="range" min="0" max="10" value="5" step="1" id="s2" oninput="sv('v2',this.value)">
       </div>
       <div class="slider-group">
-        <div class="slider-label-row">
-          <span class="slider-label">Cognitive Fog</span>
-          <span class="slider-val" id="v3">5</span>
-        </div>
+        <div class="slider-label-row"><span class="slider-label">Cognitive Fog</span><span class="slider-val" id="v3">5</span></div>
         <input type="range" min="0" max="10" value="5" step="1" id="s3" oninput="sv('v3',this.value)">
       </div>
       <div class="slider-group">
-        <div class="slider-label-row">
-          <span class="slider-label">Energy / Fatigue</span>
-          <span class="slider-val" id="v4">5</span>
-        </div>
+        <div class="slider-label-row"><span class="slider-label">Energy / Fatigue</span><span class="slider-val" id="v4">5</span></div>
         <input type="range" min="0" max="10" value="5" step="1" id="s4" oninput="sv('v4',this.value)">
         <div class="scale-ends"><span>0 = normal energy</span><span>10 = total exhaustion</span></div>
       </div>
       <div class="slider-group">
-        <div class="slider-label-row">
-          <span class="slider-label">Mood Instability</span>
-          <span class="slider-val" id="v5">4</span>
-        </div>
+        <div class="slider-label-row"><span class="slider-label">Mood Instability</span><span class="slider-val" id="v5">4</span></div>
         <input type="range" min="0" max="10" value="4" step="1" id="s5" oninput="sv('v5',this.value)">
       </div>
       <div class="slider-group">
-        <div class="slider-label-row">
-          <span class="slider-label">Sleep Disturbance</span>
-          <span class="slider-val" id="v6">4</span>
-        </div>
+        <div class="slider-label-row"><span class="slider-label">Sleep Disturbance</span><span class="slider-val" id="v6">4</span></div>
         <input type="range" min="0" max="10" value="4" step="1" id="s6" oninput="sv('v6',this.value)">
         <div class="scale-ends"><span>0 = normal sleep</span><span>10 = severely disrupted</span></div>
       </div>
     </div>
   </div>
 
-  <!-- CARD 4: Protocol -->
+  <!-- CARD 4 -->
   <div class="card">
     <div class="card-title"><span class="card-num">4</span> Ketogenic Protocol</div>
     <div class="field" style="margin-bottom:1.25rem">
@@ -697,6 +455,7 @@
   <!-- RESULTS -->
   <div id="results">
     <div class="divider"></div>
+
     <!-- Print-only header -->
     <div class="print-header">
       <div class="print-logo"><span class="print-logo-dot"></span>KetoMind Clinical Calculator</div>
@@ -711,22 +470,10 @@
     <div id="depth-pill"></div>
 
     <div class="metrics">
-      <div class="metric-box">
-        <div class="metric-val" id="r-bmi">—</div>
-        <div class="metric-lbl">BMI</div>
-      </div>
-      <div class="metric-box">
-        <div class="metric-val" id="r-whr">—</div>
-        <div class="metric-lbl">Waist-Hip Ratio</div>
-      </div>
-      <div class="metric-box">
-        <div class="metric-val" id="r-bmr">—</div>
-        <div class="metric-lbl">BMR (kcal)</div>
-      </div>
-      <div class="metric-box accent-box">
-        <div class="metric-val" id="r-target">—</div>
-        <div class="metric-lbl">Target kcal/day</div>
-      </div>
+      <div class="metric-box"><div class="metric-val" id="r-bmi">—</div><div class="metric-lbl">BMI</div></div>
+      <div class="metric-box"><div class="metric-val" id="r-whr">—</div><div class="metric-lbl">Waist-Hip Ratio</div></div>
+      <div class="metric-box"><div class="metric-val" id="r-bmr">—</div><div class="metric-lbl">BMR (kcal)</div></div>
+      <div class="metric-box accent-box"><div class="metric-val" id="r-target">—</div><div class="metric-lbl">Target kcal/day</div></div>
     </div>
 
     <div class="macro-section card" style="margin-bottom:1.5rem">
@@ -742,21 +489,9 @@
         <div class="leg"><div class="leg-dot" style="background:var(--coral)"></div>Net Carbs</div>
       </div>
       <div class="gram-cards">
-        <div class="gram-card">
-          <div class="gram-val fat" id="g-fat">—</div>
-          <div class="gram-lbl">Fat (g)</div>
-          <div class="gram-sub" id="g-fat-kcal">—</div>
-        </div>
-        <div class="gram-card">
-          <div class="gram-val prot" id="g-prot">—</div>
-          <div class="gram-lbl">Protein (g)</div>
-          <div class="gram-sub" id="g-prot-kcal">—</div>
-        </div>
-        <div class="gram-card">
-          <div class="gram-val carb" id="g-carb">—</div>
-          <div class="gram-lbl">Net Carbs (g)</div>
-          <div class="gram-sub" id="g-carb-max">—</div>
-        </div>
+        <div class="gram-card"><div class="gram-val fat" id="g-fat">—</div><div class="gram-lbl">Fat (g)</div><div class="gram-sub" id="g-fat-kcal">—</div></div>
+        <div class="gram-card"><div class="gram-val prot" id="g-prot">—</div><div class="gram-lbl">Protein (g)</div><div class="gram-sub" id="g-prot-kcal">—</div></div>
+        <div class="gram-card"><div class="gram-val carb" id="g-carb">—</div><div class="gram-lbl">Net Carbs (g)</div><div class="gram-sub" id="g-carb-max">—</div></div>
       </div>
     </div>
 
@@ -769,10 +504,76 @@
       <strong>Clinical Use Only.</strong> This tool is intended for use by licensed metabolic psychiatry clinicians. Recommendations should be interpreted alongside full clinical assessment. Not a substitute for individualized medical advice. Monitor serum electrolytes, lipids, and BHB levels per protocol.
     </div>
 
+    <div class="print-footer">
+      <span>KetoMind Clinical Calculator · Metabolic Psychiatry · For practitioner use only</span>
+      <span id="print-date">—</span>
+    </div>
+
     <button class="print-btn" onclick="window.print()">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-      Print / Save as PDF
+      Print / Save as PDF — Clinical Report
     </button>
+  </div>
+
+  <!-- MEAL PLANNER SECTION -->
+  <div id="meal-section">
+    <div class="divider"></div>
+
+    <div class="card">
+      <div class="card-title"><span class="card-num">5</span> 7-Day Meal Planner</div>
+
+      <!-- Allergy/Exclusion Input -->
+      <div class="field" style="margin-bottom:1.25rem">
+        <label>Foods to Exclude — Allergies &amp; Intolerances</label>
+        <div class="allergy-input-row">
+          <input type="text" id="allergy-input" placeholder="Type a food or ingredient..." onkeydown="if(event.key==='Enter')addAllergy()">
+          <button class="add-allergy-btn" onclick="addAllergy()">+ Add</button>
+        </div>
+        <div class="allergy-tags" id="allergy-tags"></div>
+        <div style="margin-top:10px">
+          <div style="font-size:10px;color:var(--text3);margin-bottom:7px;letter-spacing:0.5px;text-transform:uppercase">Common — click to add</div>
+          <div class="common-allergens" id="common-chips"></div>
+        </div>
+      </div>
+
+      <button class="gen-meal-btn" id="gen-meal-btn" onclick="generateMealPlan()">
+        Generate 7-Day Meal Plan →
+      </button>
+    </div>
+
+    <!-- Meal Plan Output -->
+    <div id="meal-plan-output">
+      <div id="meal-loading" class="card meal-loading" style="display:none">
+        <div class="meal-loading-spinner"></div>
+        <p>Generating your personalized meal plan...</p>
+        <div class="meal-loading-steps" id="loading-step">Analyzing macronutrient targets</div>
+      </div>
+
+      <div id="meal-plan-content" style="display:none">
+        <!-- Print page break + header for meal plan -->
+        <div class="meal-plan-divider"></div>
+        <div class="meal-plan-print-header">
+          <div class="meal-plan-print-title">7-Day Ketogenic Meal Plan</div>
+          <div class="meal-plan-print-sub" id="meal-print-sub">—</div>
+        </div>
+        <div class="print-exclusions" id="print-exclusions"></div>
+
+        <div class="meal-plan-header">
+          <div class="meal-plan-title">7-Day Meal Plan</div>
+          <button class="print-btn" style="width:auto;margin-top:0" onclick="window.print()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            Print Both Pages
+          </button>
+        </div>
+
+        <div class="day-grid" id="day-grid"></div>
+
+        <div class="meal-print-footer">
+          <span>KetoMind · 7-Day Meal Plan · Metabolic Psychiatry · For practitioner use only</span>
+          <span id="meal-print-date">—</span>
+        </div>
+      </div>
+    </div>
   </div>
 
 </main>
@@ -784,17 +585,19 @@
 <script>
   // ── State ──
   const state = { sex: 'M', kd: 'light', goal: 'maintain' };
+  let calcResults = {};
+  let allergies = [];
+
+  const COMMON_ALLERGENS = ['Dairy','Gluten','Eggs','Nuts','Shellfish','Fish','Soy','Pork','Beef','Nightshades','Seeds','Coconut','Avocado','Caffeine','Alcohol'];
 
   function sv(id, val) { document.getElementById(id).textContent = val; }
 
   function setSeg(key, val, el) {
     state[key] = val;
-    const grp = el.closest('.seg');
-    grp.querySelectorAll('button').forEach(b => b.className = '');
+    el.closest('.seg').querySelectorAll('button').forEach(b => b.className = '');
     el.classList.add('on');
   }
 
-  // Protein slider live hint
   function updateProteinSlider(val) {
     const v = parseFloat(val);
     document.getElementById('vp').textContent = v.toFixed(1) + ' g/kg';
@@ -806,107 +609,117 @@
     else              hint = 'Therapeutic maximum — use for muscle-building, refeeding, or clinically directed high-protein protocols only.';
     document.getElementById('prot-hint').textContent = hint;
   }
-  // Init hint on load
-  window.addEventListener('DOMContentLoaded', () => updateProteinSlider(1.6));
 
-  // ── Ideal Body Weight (Devine formula) ──
   function calcIBW(sex, htInTotal) {
-    // Devine: male = 50 + 2.3*(in over 60); female = 45.5 + 2.3*(in over 60)
     const base = sex === 'M' ? 50 : 45.5;
-    const ibwKg = Math.max(base + 2.3 * (htInTotal - 60), base);
-    return ibwKg;
+    return Math.max(base + 2.3 * (htInTotal - 60), base);
   }
 
-  // ── Calculation ──
+  // ── Allergy management ──
+  function renderChips() {
+    const container = document.getElementById('common-chips');
+    container.innerHTML = COMMON_ALLERGENS.map(a =>
+      `<span class="allergen-chip${allergies.includes(a)?' added':''}" onclick="addAllergyByName('${a}')">${a}</span>`
+    ).join('');
+  }
+
+  function addAllergyByName(name) {
+    if(!allergies.includes(name)) { allergies.push(name); renderAllergyTags(); renderChips(); }
+  }
+
+  function addAllergy() {
+    const input = document.getElementById('allergy-input');
+    const val = input.value.trim();
+    if(val && !allergies.map(a=>a.toLowerCase()).includes(val.toLowerCase())) {
+      const display = val.charAt(0).toUpperCase() + val.slice(1);
+      allergies.push(display);
+      renderAllergyTags();
+      renderChips();
+    }
+    input.value = '';
+  }
+
+  function removeAllergy(name) {
+    allergies = allergies.filter(a => a !== name);
+    renderAllergyTags();
+    renderChips();
+  }
+
+  function renderAllergyTags() {
+    document.getElementById('allergy-tags').innerHTML = allergies.map(a =>
+      `<span class="allergy-tag">${a}<button onclick="removeAllergy('${a}')" title="Remove">×</button></span>`
+    ).join('');
+  }
+
+  // ── Main calculation ──
   function calculate() {
-    const age    = parseFloat(document.getElementById('age').value) || 42;
-    const ftVal  = parseFloat(document.getElementById('ht-ft').value) || 5;
-    const inVal  = parseFloat(document.getElementById('ht-in').value) || 9;
-    const wtLbs  = parseFloat(document.getElementById('wt').value) || 185;
-    const waistIn= parseFloat(document.getElementById('waist').value) || 36;
-    const hipIn  = parseFloat(document.getElementById('hip').value) || 40;
-    const actMult= parseFloat(document.getElementById('activity').value) || 1.375;
+    const age     = parseFloat(document.getElementById('age').value) || 42;
+    const ftVal   = parseFloat(document.getElementById('ht-ft').value) || 5;
+    const inVal   = parseFloat(document.getElementById('ht-in').value) || 9;
+    const wtLbs   = parseFloat(document.getElementById('wt').value) || 185;
+    const waistIn = parseFloat(document.getElementById('waist').value) || 36;
+    const hipIn   = parseFloat(document.getElementById('hip').value) || 40;
+    const actMult = parseFloat(document.getElementById('activity').value) || 1.375;
     const protPerKg = parseFloat(document.getElementById('prot-target').value) || 1.6;
 
-    // Convert to metric for Mifflin-St Jeor
     const htInTotal = ftVal * 12 + inVal;
     const htCm  = htInTotal * 2.54;
     const wtKg  = wtLbs * 0.453592;
     const whr   = waistIn / hipIn;
-
-    // IBW
     const ibwKg = calcIBW(state.sex, htInTotal);
     const ibwLbs = Math.round(ibwKg * 2.205);
 
-    // Symptoms avg
     const syms = [1,2,3,4,5,6].map(i => parseInt(document.getElementById('s'+i).value));
     const avgSym = syms.reduce((a,b)=>a+b,0)/6;
 
-    // Mifflin-St Jeor BMR
     let bmr;
     if(state.sex === 'M') bmr = 10*wtKg + 6.25*htCm - 5*age + 5;
     else                  bmr = 10*wtKg + 6.25*htCm - 5*age - 161;
-
     const tdee = bmr * actMult;
-
-    // BMI (imperial: 703 × lbs / in²)
     const bmi = 703 * wtLbs / (htInTotal * htInTotal);
 
-    // Target calories by goal
     let kcal;
     if(state.goal === 'loss') {
       const def = avgSym > 7 ? 0.10 : avgSym > 4 ? 0.15 : 0.20;
       kcal = tdee * (1 - def);
     } else if(state.goal === 'gain') {
-      const surplus = avgSym > 7 ? 0.05 : 0.10;
-      kcal = tdee * (1 + surplus);
+      kcal = tdee * (avgSym > 7 ? 1.05 : 1.10);
     } else {
       kcal = tdee;
     }
     const minKcal = state.sex === 'M' ? 1500 : 1200;
     kcal = Math.max(kcal, minKcal);
 
-    // Protein from IBW and user-defined g/kg
     const protG = Math.round(ibwKg * protPerKg);
     const protKcal = protG * 4;
-
-    // Carb ceiling by depth
     let carbMax;
     if(state.kd === 'light')       carbMax = 50;
     else if(state.kd === 'medium') carbMax = 30;
     else                           carbMax = 20;
-
-    // Net carbs: percentage-based but hard-capped
-    let carbPct;
-    if(state.kd === 'light')       carbPct = 0.05;
-    else if(state.kd === 'medium') carbPct = 0.03;
-    else                           carbPct = 0.02;
+    let carbPct = state.kd === 'light' ? 0.05 : state.kd === 'medium' ? 0.03 : 0.02;
     const carbG = Math.round(Math.min((kcal * carbPct) / 4, carbMax));
     const carbKcal = carbG * 4;
-
-    // Fat fills remaining calories
     const fatKcal = Math.max(kcal - protKcal - carbKcal, 0);
     const fatG = Math.round(fatKcal / 9);
-
-    // Percentages for bar display
     const totalKcal = fatKcal + protKcal + carbKcal;
     const fPct  = Math.round((fatKcal / totalKcal) * 100);
     const prPct = Math.round((protKcal / totalKcal) * 100);
     const cPct  = Math.round((carbKcal / totalKcal) * 100);
 
-    // ── Render ──
+    // Store for meal planner
+    calcResults = { kcal: Math.round(kcal), fatG, protG, carbG, carbMax, fPct, prPct, cPct, kd: state.kd, goal: state.goal, sex: state.sex, avgSym, bmi, whr, ibwKg, ibwLbs, protPerKg, age, ftVal, inVal, wtLbs, syms };
+
+    // Render
     document.getElementById('r-bmi').textContent    = bmi.toFixed(1);
     document.getElementById('r-whr').textContent    = whr.toFixed(2);
     document.getElementById('r-bmr').textContent    = Math.round(bmr);
     document.getElementById('r-target').textContent = Math.round(kcal);
-
     document.getElementById('bar-fat').style.width  = fPct + '%';
     document.getElementById('bar-fat').textContent  = fPct + '%';
     document.getElementById('bar-prot').style.width = prPct + '%';
     document.getElementById('bar-prot').textContent = prPct + '%';
     document.getElementById('bar-carb').style.width = cPct + '%';
     document.getElementById('bar-carb').textContent = cPct + '%';
-
     document.getElementById('g-fat').textContent       = fatG + 'g';
     document.getElementById('g-fat-kcal').textContent  = Math.round(fatKcal) + ' kcal';
     document.getElementById('g-prot').textContent      = protG + 'g';
@@ -915,81 +728,204 @@
     document.getElementById('g-carb-max').textContent  = 'max ' + carbMax + 'g/day';
 
     const depthLabels = { light:'Light Ketosis · 1.0–1.5 mmol/L BHB', medium:'Medium Ketosis · 1.5–3.0 mmol/L BHB', deep:'Deep Therapeutic Ketosis · 3.0–5.0 mmol/L BHB' };
-    const depthPill   = document.getElementById('depth-pill');
-    depthPill.innerHTML = `<div class="depth-pill ${state.kd}"><span class="depth-dot"></span>${depthLabels[state.kd]}</div>`;
+    document.getElementById('depth-pill').innerHTML = `<div class="depth-pill ${state.kd}"><span class="depth-dot"></span>${depthLabels[state.kd]}</div>`;
 
     const goalLabel = { maintain:'Maintenance', loss:'Weight Loss', gain:'Weight Gain' }[state.goal];
-    const htDisplay = `${ftVal}′${inVal}″`;
-    document.getElementById('res-sub').textContent =
-      `${state.sex==='M'?'Male':'Female'} · Age ${age} · ${htDisplay} · ${wtLbs} lbs · ${goalLabel} · Generated ${new Date().toLocaleDateString()}`;
+    document.getElementById('res-sub').textContent = `${state.sex==='M'?'Male':'Female'} · Age ${age} · ${ftVal}′${inVal}″ · ${wtLbs} lbs · ${goalLabel} · Generated ${new Date().toLocaleDateString()}`;
 
-    // ── Clinical Notes ──
     const notes = [];
-
-    // Symptom note
-    if(avgSym > 7)
-      notes.push(`High symptom burden (avg ${avgSym.toFixed(1)}/10) — conservative caloric adjustment applied to minimize cortisol-driven metabolic stress during keto-adaptation. Monitor closely in weeks 1–3.`);
-    else if(avgSym > 4)
-      notes.push(`Moderate symptom burden (avg ${avgSym.toFixed(1)}/10) — standard caloric adjustment applied. Assess energy and mood weekly; adjust protocol if psychiatric symptoms worsen during adaptation.`);
-    else
-      notes.push(`Lower symptom burden (avg ${avgSym.toFixed(1)}/10) — keto-adaptation typically faster in lower-severity presentations; BHB may reach target range within 3–5 days.`);
-
-    // IBW / protein note
-    notes.push(`Ideal body weight (Devine formula): ${ibwLbs} lbs (${ibwKg.toFixed(1)} kg). Protein set at ${protPerKg.toFixed(1)} g/kg IBW = ${protG}g/day — fat adjusted to fill remaining caloric target after protein and carbs are fixed.`);
-
-    // Goal note
-    if(state.goal === 'loss') {
-      const defPct = avgSym > 7 ? 10 : avgSym > 4 ? 15 : 20;
-      notes.push(`Weight-loss phase (${defPct}% deficit): reassess every 3–4 weeks. If stall exceeds 3 weeks, reduce by 50–75 kcal/day or increase activity. Do not reduce below ${minKcal} kcal/day.`);
-    } else if(state.goal === 'gain') {
-      const surplusPct = avgSym > 7 ? 5 : 10;
-      notes.push(`Weight-gain phase (${surplusPct}% surplus): target slow, lean mass accrual of 0.25–0.5 lbs/week. Reassess body composition every 4–6 weeks; adjust surplus if fat gain exceeds lean gain.`);
-    }
-
-    // WHR note
+    if(avgSym > 7) notes.push(`High symptom burden (avg ${avgSym.toFixed(1)}/10) — conservative caloric adjustment applied to minimize cortisol-driven metabolic stress during keto-adaptation. Monitor closely in weeks 1–3.`);
+    else if(avgSym > 4) notes.push(`Moderate symptom burden (avg ${avgSym.toFixed(1)}/10) — standard caloric adjustment applied. Assess energy and mood weekly; adjust protocol if psychiatric symptoms worsen during adaptation.`);
+    else notes.push(`Lower symptom burden (avg ${avgSym.toFixed(1)}/10) — keto-adaptation typically faster; BHB may reach target range within 3–5 days.`);
+    notes.push(`Ideal body weight (Devine formula): ${ibwLbs} lbs (${ibwKg.toFixed(1)} kg). Protein set at ${protPerKg.toFixed(1)} g/kg IBW = ${protG}g/day — fat fills remaining calories after protein and carbs are fixed.`);
+    if(state.goal === 'loss') { const d = avgSym > 7 ? 10 : avgSym > 4 ? 15 : 20; notes.push(`Weight-loss phase (${d}% deficit): reassess every 3–4 weeks. Do not reduce below ${minKcal} kcal/day.`); }
+    else if(state.goal === 'gain') { const s = avgSym > 7 ? 5 : 10; notes.push(`Weight-gain phase (${s}% surplus): target 0.25–0.5 lbs/week lean accrual. Reassess body composition every 4–6 weeks.`); }
     const whrHigh = (state.sex === 'M' && whr > 0.90) || (state.sex === 'F' && whr > 0.85);
-    if(whrHigh)
-      notes.push(`Elevated waist-hip ratio (${whr.toFixed(2)}) indicates central adiposity — a key driver of neuroinflammation. Medium or deep ketosis strongly favored for this metabolic phenotype.`);
+    if(whrHigh) notes.push(`Elevated WHR (${whr.toFixed(2)}) indicates central adiposity — key neuroinflammation driver. Medium or deep ketosis strongly favored.`);
+    if(bmi >= 30) notes.push(`BMI ${bmi.toFixed(1)} (obese range). Consider DEXA at baseline and 12 weeks.`);
+    else if(bmi < 18.5) notes.push(`BMI ${bmi.toFixed(1)} below normal weight. Weight-loss goal not recommended — reassess.`);
+    if(state.kd === 'deep') notes.push(`Deep ketosis: supplement sodium 3–5g/day, potassium 2–3g/day, magnesium glycinate 300–400mg/day. Check electrolytes and lipids at 6–8 weeks.`);
+    else if(state.kd === 'light') notes.push(`Light ketosis: verify with home BHB meter (>1.0 mmol/L). Advance to medium depth if insufficient response at 4–6 weeks.`);
+    notes.push(`Distribute protein (${protG}g) across 3+ meals. Prioritize complete animal proteins: eggs, fatty fish, red meat, poultry.`);
 
-    // BMI note
-    if(bmi >= 30)
-      notes.push(`BMI ${bmi.toFixed(1)} (obese range). Consider DEXA body composition at baseline and 12 weeks to track lean mass vs. fat loss ratio.`);
-    else if(bmi < 18.5)
-      notes.push(`BMI ${bmi.toFixed(1)} is below normal weight. Weight-loss goal not recommended — reassess primary goal. Screen for restrictive eating behaviors before initiating protocol.`);
-
-    // Depth note
-    if(state.kd === 'deep')
-      notes.push(`Deep ketosis: BHB target 3.0–5.0 mmol/L. Supplement sodium 3–5g/day, potassium 2–3g/day, magnesium glycinate 300–400mg/day. Check electrolytes and lipid panel at 6–8 weeks. Therapeutic benefit for severe mood and psychotic-spectrum presentations supported by emerging evidence.`);
-    else if(state.kd === 'light')
-      notes.push(`Light ketosis: verify with home BHB meter (target >1.0 mmol/L). If symptom response is insufficient at 4–6 weeks, consider advancing to medium depth protocol.`);
-
-    notes.push(`Distribute protein (${protG}g) across 3+ meals to optimize leucine threshold for muscle protein synthesis. Prioritize complete animal proteins: eggs, fatty fish, red meat, poultry.`);
-
-    const nb = document.getElementById('notes-body');
-    nb.innerHTML = notes.map(n => `<div class="note-line">${n}</div>`).join('');
+    document.getElementById('notes-body').innerHTML = notes.map(n => `<div class="note-line">${n}</div>`).join('');
 
     updatePrintFields(state.sex, age, ftVal, inVal, wtLbs, protPerKg, syms, ibwLbs, ibwKg, goalLabel);
 
-    const res = document.getElementById('results');
-    res.className = 'show';
-    setTimeout(() => res.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    document.getElementById('results').className = 'show';
+    document.getElementById('meal-section').className = 'show';
+    renderChips();
+
+    setTimeout(() => document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
   }
 
-  // ── Populate print-only fields ──
   function updatePrintFields(sex, age, ftVal, inVal, wtLbs, protPerKg, syms, ibwLbs, ibwKg, goalLabel) {
     const symLabels = ['Mood/Depression','Anxiety','Cognitive Fog','Energy/Fatigue','Mood Instability','Sleep Disturbance'];
-    const symVals   = syms;
     const ps = document.getElementById('print-symptoms');
-    if(ps) ps.innerHTML = symLabels.map((l,i) =>
-      `<div class="print-sym-item"><span class="print-sym-name">${l}</span><span class="print-sym-val">${symVals[i]}/10</span></div>`
-    ).join('');
+    if(ps) ps.innerHTML = symLabels.map((l,i) => `<div class="print-sym-item"><span class="print-sym-name">${l}</span><span class="print-sym-val">${syms[i]}/10</span></div>`).join('');
     const pm = document.getElementById('print-meta');
-    const htDisp = `${ftVal}ft ${inVal}in`;
-    if(pm) pm.innerHTML = `${sex==='M'?'Male':'Female'} · Age ${age} · ${htDisp} · ${wtLbs} lbs<br>IBW: ${ibwLbs} lbs (${ibwKg.toFixed(1)} kg) · Protein: ${protPerKg.toFixed(1)} g/kg IBW<br>Goal: ${goalLabel} · Generated: ${new Date().toLocaleDateString()}`;
+    if(pm) pm.innerHTML = `${sex==='M'?'Male':'Female'} · Age ${age} · ${ftVal}ft ${inVal}in · ${wtLbs} lbs<br>IBW: ${ibwLbs} lbs (${ibwKg.toFixed(1)} kg) · Protein: ${protPerKg.toFixed(1)} g/kg IBW<br>Goal: ${goalLabel} · Generated: ${new Date().toLocaleDateString()}`;
     const pd = document.getElementById('print-date');
     if(pd) pd.textContent = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
   }
 
+  // ── MEAL PLAN GENERATOR ──
+  async function generateMealPlan() {
+    if(!calcResults.kcal) { alert('Please generate clinical recommendations first.'); return; }
+    const btn = document.getElementById('gen-meal-btn');
+    btn.disabled = true;
+    btn.textContent = 'Generating...';
+
+    const loadingEl = document.getElementById('meal-loading');
+    const contentEl = document.getElementById('meal-plan-content');
+    loadingEl.style.display = 'block';
+    contentEl.style.display = 'none';
+    document.getElementById('meal-plan-output').className = 'show';
+
+    const steps = [
+      'Analyzing macronutrient targets...',
+      'Applying ketogenic depth constraints...',
+      'Accounting for food exclusions...',
+      'Balancing meals across 7 days...',
+      'Calculating per-meal macros...',
+      'Finalizing meal plan...'
+    ];
+    let si = 0;
+    const stepInterval = setInterval(() => {
+      document.getElementById('loading-step').textContent = steps[si % steps.length];
+      si++;
+    }, 1800);
+
+    loadingEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    const { kcal, fatG, protG, carbG, carbMax, kd, goal, sex, avgSym } = calcResults;
+    const exclusionStr = allergies.length > 0 ? `STRICTLY EXCLUDE these foods/ingredients: ${allergies.join(', ')}.` : 'No specific food exclusions.';
+    const depthDesc = kd === 'light' ? 'light ketosis (net carbs ≤50g/day)' : kd === 'medium' ? 'medium ketosis (net carbs ≤30g/day)' : 'deep therapeutic ketosis (net carbs ≤20g/day)';
+    const goalDesc = goal === 'loss' ? 'weight loss' : goal === 'gain' ? 'weight gain' : 'weight maintenance';
+
+    const prompt = `You are a clinical ketogenic dietitian specializing in metabolic psychiatry. Generate a 7-day ketogenic meal plan.
+
+CLIENT TARGETS (daily):
+- Total calories: ${kcal} kcal
+- Fat: ${fatG}g
+- Protein: ${protG}g  
+- Net Carbs: max ${carbG}g (hard ceiling: ${carbMax}g)
+- Protocol: ${depthDesc}
+- Goal: ${goalDesc}
+- Symptom burden avg: ${avgSym.toFixed(1)}/10 ${avgSym > 6 ? '(high — prioritize easy-to-prepare, anti-inflammatory foods)' : ''}
+
+EXCLUSIONS: ${exclusionStr}
+
+RULES:
+- Every meal must be strictly ketogenic
+- Each day has 4 meals: Breakfast, Lunch, Dinner, Snack
+- Distribute macros roughly: Breakfast 25%, Lunch 30%, Dinner 35%, Snack 10%
+- Use whole foods — no processed keto products
+- Vary proteins and vegetables across days — no exact meal repeated
+- Include brief preparation note (1 sentence max) for each meal
+
+Respond ONLY with valid JSON. No preamble, no markdown, no explanation. Format:
+{
+  "days": [
+    {
+      "day": "Monday",
+      "meals": [
+        {
+          "type": "Breakfast",
+          "name": "Meal name",
+          "detail": "Brief ingredients/prep note",
+          "fat": 45,
+          "protein": 32,
+          "carbs": 4
+        },
+        { "type": "Lunch", "name": "...", "detail": "...", "fat": 55, "protein": 38, "carbs": 5 },
+        { "type": "Dinner", "name": "...", "detail": "...", "fat": 64, "protein": 44, "carbs": 6 },
+        { "type": "Snack", "name": "...", "detail": "...", "fat": 18, "protein": 12, "carbs": 2 }
+      ],
+      "totalKcal": 1850,
+      "totalFat": 182,
+      "totalProtein": 126,
+      "totalCarbs": 17
+    }
+  ]
+}
+Return all 7 days (Monday through Sunday).`;
+
+    try {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 4000,
+          messages: [{ role: 'user', content: prompt }]
+        })
+      });
+
+      clearInterval(stepInterval);
+      loadingEl.style.display = 'none';
+
+      if(!response.ok) throw new Error('API error: ' + response.status);
+      const data = await response.json();
+      const raw = data.content.map(b => b.text || '').join('');
+      const clean = raw.replace(/```json|```/g, '').trim();
+      const plan = JSON.parse(clean);
+
+      renderMealPlan(plan);
+
+    } catch(err) {
+      clearInterval(stepInterval);
+      loadingEl.style.display = 'none';
+      document.getElementById('day-grid').innerHTML = `<div class="card" style="color:var(--coral);font-size:12px;padding:1.5rem">Error generating meal plan: ${err.message}. Please try again.</div>`;
+      contentEl.style.display = 'block';
+      console.error(err);
+    }
+
+    btn.disabled = false;
+    btn.textContent = 'Regenerate 7-Day Meal Plan →';
+  }
+
+  function renderMealPlan(plan) {
+    const grid = document.getElementById('day-grid');
+    grid.innerHTML = plan.days.map(day => `
+      <div class="day-card">
+        <div class="day-header">
+          <span class="day-name">${day.day}</span>
+          <span class="day-macros">${day.totalKcal} kcal · F ${day.totalFat}g · P ${day.totalProtein}g · C ${day.totalCarbs}g</span>
+        </div>
+        <div class="meals-row">
+          ${day.meals.map(m => `
+            <div class="meal-cell">
+              <div class="meal-label">${m.type}</div>
+              <div class="meal-name">${m.name}</div>
+              <div class="meal-detail">${m.detail}</div>
+              <div class="meal-macros">
+                <span class="mmac f">F ${m.fat}g</span>
+                <span class="mmac p">P ${m.protein}g</span>
+                <span class="mmac c">C ${m.carbs}g</span>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `).join('');
+
+    // Set print sub info
+    const { kcal, fatG, protG, carbG, kd } = calcResults;
+    const kdLabel = { light:'Light Ketosis', medium:'Medium Ketosis', deep:'Deep Ketosis' }[kd];
+    document.getElementById('meal-print-sub').textContent = `${kdLabel} · ${kcal} kcal/day · F ${fatG}g · P ${protG}g · C ${carbG}g · ${new Date().toLocaleDateString()}`;
+    document.getElementById('meal-print-date').textContent = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+
+    const excEl = document.getElementById('print-exclusions');
+    if(allergies.length > 0) excEl.textContent = 'Excluded foods/allergens: ' + allergies.join(', ');
+    else excEl.textContent = '';
+
+    document.getElementById('meal-plan-content').style.display = 'block';
+    setTimeout(() => document.getElementById('meal-plan-content').scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+  }
+
+  // Init
+  window.addEventListener('DOMContentLoaded', () => { updateProteinSlider(1.6); renderChips(); });
 </script>
 </body>
 </html>
