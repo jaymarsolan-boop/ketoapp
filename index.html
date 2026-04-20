@@ -300,6 +300,34 @@
     .mmac.p { background: #fdf3e3 !important; color: #c4883a !important; }
     .mmac.c { background: #fdf0ec !important; color: #c45a3a !important; }
 
+
+    /* Recipe pages */
+    .recipe-pages { display: block !important; }
+    .recipe-page-break { display: block !important; page-break-before: always; height: 1px; }
+    .recipe-section-header { display: flex !important; align-items: center; justify-content: space-between; border-bottom: 2px solid #2a5c3a; padding-bottom: 10px; margin-bottom: 16px; }
+    .recipe-section-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 300; color: #2a5c3a; }
+    .recipe-section-sub { font-size: 8px; color: #666; }
+    .recipe-day-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #2a5c3a; font-weight: 500; margin: 14px 0 8px; padding-bottom: 4px; border-bottom: 1px solid #d0d8d0; }
+    .recipe-grid { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 10px !important; margin-bottom: 4px; }
+    .recipe-card { background: #f9faf9; border: 1px solid #d0d8d0; border-radius: 6px; padding: 10px 12px; page-break-inside: avoid; }
+    .recipe-meal-type { font-size: 7px; letter-spacing: 1.5px; text-transform: uppercase; color: #888; margin-bottom: 3px; }
+    .recipe-meal-name { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 400; color: #1a1a1a; margin-bottom: 6px; line-height: 1.2; }
+    .recipe-meta { display: flex; gap: 10px; margin-bottom: 8px; font-size: 7px; color: #666; }
+    .recipe-meta span { display: flex; align-items: center; gap: 3px; }
+    .recipe-macros-row { display: flex; gap: 6px; margin-bottom: 8px; }
+    .recipe-mac { font-size: 7px; padding: 1px 5px; border-radius: 3px; }
+    .recipe-mac.f { background: #eaf5ee; color: #2a5c3a; }
+    .recipe-mac.p { background: #fdf3e3; color: #c4883a; }
+    .recipe-mac.c { background: #fdf0ec; color: #c45a3a; }
+    .recipe-section-lbl { font-size: 7px; letter-spacing: 1px; text-transform: uppercase; color: #888; margin: 6px 0 3px; }
+    .recipe-ingredients { list-style: none; padding: 0; margin: 0 0 6px; }
+    .recipe-ingredients li { font-size: 8px; color: #333; padding: 1px 0; border-bottom: 1px solid #eee; line-height: 1.4; }
+    .recipe-ingredients li::before { content: "· "; color: #2a5c3a; }
+    .recipe-instructions { list-style: none; padding: 0; margin: 0; counter-reset: step; }
+    .recipe-instructions li { font-size: 8px; color: #333; padding: 2px 0 2px 16px; position: relative; line-height: 1.5; counter-increment: step; }
+    .recipe-instructions li::before { content: counter(step); position: absolute; left: 0; top: 2px; width: 11px; height: 11px; background: #2a5c3a; color: #fff; border-radius: 50%; font-size: 6px; display: flex; align-items: center; justify-content: center; font-weight: 500; }
+    .recipe-print-footer { display: flex !important; justify-content: space-between; margin-top: 10px; padding-top: 8px; border-top: 1px solid #d0d8d0; font-size: 7px; color: #999; }
+
     .print-footer { display: flex !important; justify-content: space-between; margin-top: 14px; padding-top: 8px; border-top: 1px solid #d0d8d0; font-size: 7px; color: #999; }
     .meal-print-footer { display: flex !important; justify-content: space-between; margin-top: 10px; padding-top: 8px; border-top: 1px solid #d0d8d0; font-size: 7px; color: #999; }
 
@@ -309,7 +337,9 @@
   /* Screen-only hide */
   .print-header, .print-symptoms, .print-footer,
   .meal-plan-divider, .meal-plan-print-header, .meal-plan-print-sub,
-  .meal-print-footer, .print-exclusions { display: none; }
+  .meal-print-footer, .print-exclusions,
+  .recipe-pages, .recipe-page-break, .recipe-section-header,
+  .recipe-print-footer { display: none; }
 </style>
 </head>
 <body>
@@ -824,7 +854,7 @@ RULES:
 - Vary proteins and vegetables across days — no exact meal repeated
 - Include brief preparation note (1 sentence max) for each meal
 
-Reply with ONLY a JSON object, no other text. Use this exact format for all 7 days Monday-Sunday: {"days":[{"day":"Monday","mea
+Respond ONLY with valid JSON. No preamble, no markdown, no explanation. Each meal must include a full recipe with ingredients (with quantities) and step-by-step cooking instructions. Format:
 {
   "days": [
     {
@@ -836,11 +866,29 @@ Reply with ONLY a JSON object, no other text. Use this exact format for all 7 da
           "detail": "Brief ingredients/prep note",
           "fat": 45,
           "protein": 32,
-          "carbs": 4
+          "carbs": 4,
+          "recipe": {
+            "servings": 1,
+            "prepTime": "5 min",
+            "cookTime": "10 min",
+            "ingredients": [
+              "3 large eggs",
+              "1 tbsp butter",
+              "2 oz smoked salmon",
+              "1 tbsp cream cheese",
+              "Salt and pepper to taste"
+            ],
+            "instructions": [
+              "Whisk eggs with salt and pepper in a bowl.",
+              "Melt butter in a non-stick pan over medium-low heat.",
+              "Pour in eggs and gently fold until just set.",
+              "Top with smoked salmon and cream cheese. Serve immediately."
+            ]
+          }
         },
-        { "type": "Lunch", "name": "...", "detail": "...", "fat": 55, "protein": 38, "carbs": 5 },
-        { "type": "Dinner", "name": "...", "detail": "...", "fat": 64, "protein": 44, "carbs": 6 },
-        { "type": "Snack", "name": "...", "detail": "...", "fat": 18, "protein": 12, "carbs": 2 }
+        { "type": "Lunch", "name": "...", "detail": "...", "fat": 55, "protein": 38, "carbs": 5, "recipe": { "servings": 1, "prepTime": "...", "cookTime": "...", "ingredients": ["..."], "instructions": ["..."] } },
+        { "type": "Dinner", "name": "...", "detail": "...", "fat": 64, "protein": 44, "carbs": 6, "recipe": { "servings": 1, "prepTime": "...", "cookTime": "...", "ingredients": ["..."], "instructions": ["..."] } },
+        { "type": "Snack", "name": "...", "detail": "...", "fat": 18, "protein": 12, "carbs": 2, "recipe": { "servings": 1, "prepTime": "...", "cookTime": "...", "ingredients": ["..."], "instructions": ["..."] } }
       ],
       "totalKcal": 1850,
       "totalFat": 182,
@@ -849,10 +897,10 @@ Reply with ONLY a JSON object, no other text. Use this exact format for all 7 da
     }
   ]
 }
-Return all 7 days (Monday through Sunday).`;
+Return all 7 days (Monday through Sunday). Every meal must have a complete recipe field.`;
 
     try {
-      const response = await fetch('/api/chat', {
+      const response = await fetch('https://api.anthropic.com/v1/messages', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -920,8 +968,70 @@ Return all 7 days (Monday through Sunday).`;
     if(allergies.length > 0) excEl.textContent = 'Excluded foods/allergens: ' + allergies.join(', ');
     else excEl.textContent = '';
 
+    // Render print-only recipe pages
+    renderRecipes(plan);
+
     document.getElementById('meal-plan-content').style.display = 'block';
     setTimeout(() => document.getElementById('meal-plan-content').scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+  }
+
+  function renderRecipes(plan) {
+    const dateStr = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    const { kcal, kd } = calcResults;
+    const kdLabel = { light:'Light Ketosis', medium:'Medium Ketosis', deep:'Deep Ketosis' }[kd];
+
+    // Group days into sets of 2 for print pages (2 days per page, 2 meals per row = 4 recipes per page)
+    let html = '';
+    plan.days.forEach((day, di) => {
+      // New page every 2 days
+      if(di % 2 === 0) {
+        if(di > 0) html += '</div>'; // close previous page
+        html += `
+          <div class="recipe-page-break"></div>
+          <div class="recipe-section-header">
+            <div class="recipe-section-title">Recipe Guide — Days ${di+1}${di+1 < plan.days.length ? '–'+(di+2) : ''}</div>
+            <div class="recipe-section-sub">${kdLabel} · ${kcal} kcal/day · ${dateStr}</div>
+          </div>
+          <div>`;
+      }
+
+      html += `<div class="recipe-day-label">${day.day}</div>`;
+      html += `<div class="recipe-grid">`;
+      day.meals.forEach(m => {
+        const r = m.recipe || {};
+        const ingredients = (r.ingredients || []).map(i => `<li>${i}</li>`).join('');
+        const instructions = (r.instructions || []).map(i => `<li>${i}</li>`).join('');
+        html += `
+          <div class="recipe-card">
+            <div class="recipe-meal-type">${m.type}</div>
+            <div class="recipe-meal-name">${m.name}</div>
+            <div class="recipe-meta">
+              ${r.prepTime ? `<span>Prep: ${r.prepTime}</span>` : ''}
+              ${r.cookTime ? `<span>Cook: ${r.cookTime}</span>` : ''}
+              ${r.servings ? `<span>Serves: ${r.servings}</span>` : ''}
+            </div>
+            <div class="recipe-macros-row">
+              <span class="recipe-mac f">F ${m.fat}g</span>
+              <span class="recipe-mac p">P ${m.protein}g</span>
+              <span class="recipe-mac c">C ${m.carbs}g</span>
+            </div>
+            <div class="recipe-section-lbl">Ingredients</div>
+            <ul class="recipe-ingredients">${ingredients}</ul>
+            <div class="recipe-section-lbl">Instructions</div>
+            <ol class="recipe-instructions">${instructions}</ol>
+          </div>`;
+      });
+      html += `</div>`; // close recipe-grid
+    });
+    html += '</div>'; // close last page div
+
+    html += `
+      <div class="recipe-print-footer">
+        <span>KetoMind · Recipe Guide · Metabolic Psychiatry · For practitioner use only</span>
+        <span>${dateStr}</span>
+      </div>`;
+
+    document.getElementById('recipe-pages').innerHTML = html;
   }
 
   // Init
