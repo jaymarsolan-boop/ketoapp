@@ -210,6 +210,27 @@
   .meal-loading p { font-size: 12px; color: var(--text3); }
   .meal-loading-steps { font-size: 11px; color: var(--teal); margin-top: 6px; min-height: 18px; }
 
+  /* ── SHOPPING LIST ── */
+  #shopping-list-section { margin-top: 2rem; }
+  .shopping-list-screen-header { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 1rem; }
+  .shopping-list-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 300; color: var(--text); }
+  .shopping-list-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media(max-width: 600px) { .shopping-list-grid { grid-template-columns: 1fr; } }
+  .shopping-category { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 1rem 1.25rem; break-inside: avoid; }
+  .shopping-category-name { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--accent); font-weight: 500; margin-bottom: 0.75rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  .shopping-items { list-style: none; padding: 0; margin: 0; }
+  .shopping-items li { padding: 5px 0; border-bottom: 1px solid var(--border); }
+  .shopping-items li:last-child { border-bottom: none; }
+  .shopping-items label { display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 12px; color: var(--text); }
+  .shopping-items input[type=checkbox] { appearance: none; -webkit-appearance: none; width: 14px; height: 14px; border: 1px solid var(--border2); border-radius: 3px; background: var(--bg3); cursor: pointer; position: relative; flex-shrink: 0; transition: all 0.15s; }
+  .shopping-items input[type=checkbox]:hover { border-color: var(--accent); }
+  .shopping-items input[type=checkbox]:checked { background: var(--accent); border-color: var(--accent); }
+  .shopping-items input[type=checkbox]:checked::after { content: '✓'; position: absolute; top: -3px; left: 1px; color: #fff; font-size: 12px; font-weight: bold; line-height: 1; }
+  .shopping-items input[type=checkbox]:checked + .item-name { text-decoration: line-through; color: var(--text3); }
+  .shopping-items input[type=checkbox]:checked ~ .item-qty { color: var(--text3); opacity: 0.5; }
+  .shopping-items .item-name { flex: 1; }
+  .shopping-items .item-qty { font-size: 11px; color: var(--text2); white-space: nowrap; }
+
   /* ── PRINT STYLES ── */
   @media print {
     @page { margin: 1.5cm 1.4cm; size: letter; }
@@ -301,6 +322,27 @@
     .mmac.c { background: #fdf0ec !important; color: #c45a3a !important; }
 
 
+    /* Shopping list print */
+    .shopping-list-divider { display: block !important; page-break-before: always; height: 1px; }
+    .shopping-list-print-header { display: flex !important; align-items: center; justify-content: space-between; border-bottom: 2px solid #9e5544; padding-bottom: 10px; margin-bottom: 14px; }
+    .shopping-list-print-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 300; color: #9e5544; }
+    .shopping-list-print-sub { font-size: 8px; color: #666; text-align: right; }
+    .shopping-list-screen-header { display: none !important; }
+    .shopping-list-grid { display: block !important; column-count: 2 !important; column-gap: 16px !important; column-fill: balance !important; }
+    .shopping-category { background: #f9faf9 !important; border: 1px solid #d0d8d0 !important; border-radius: 5px !important; padding: 7px 11px !important; margin: 0 0 7px !important; break-inside: avoid !important; page-break-inside: avoid !important; -webkit-column-break-inside: avoid !important; display: inline-block; width: 100%; }
+    .shopping-category-name { font-size: 8px !important; letter-spacing: 1.5px !important; color: #9e5544 !important; font-weight: 500 !important; margin-bottom: 5px !important; padding-bottom: 3px !important; border-bottom: 1px solid #d0d8d0 !important; }
+    .shopping-items li { padding: 2px 0 !important; border-bottom: 1px solid #eee !important; }
+    .shopping-items li:last-child { border-bottom: none !important; }
+    .shopping-items label { display: flex !important; align-items: center !important; gap: 6px !important; font-size: 8px !important; color: #333 !important; cursor: default !important; }
+    .shopping-items input[type=checkbox] { appearance: none !important; -webkit-appearance: none !important; width: 8px !important; height: 8px !important; border: 1px solid #888 !important; background: #fff !important; border-radius: 2px !important; flex-shrink: 0; }
+    .shopping-items input[type=checkbox]:checked { background: #fff !important; border-color: #888 !important; }
+    .shopping-items input[type=checkbox]:checked::after { display: none !important; }
+    .shopping-items input[type=checkbox]:checked + .item-name { text-decoration: none !important; color: #333 !important; }
+    .shopping-items input[type=checkbox]:checked ~ .item-qty { color: #666 !important; opacity: 1 !important; }
+    .shopping-items .item-name { flex: 1 !important; color: #333 !important; }
+    .shopping-items .item-qty { font-size: 7px !important; color: #666 !important; white-space: nowrap !important; }
+    .shopping-list-print-footer { display: flex !important; justify-content: space-between; margin-top: 12px; padding-top: 8px; border-top: 1px solid #d0d8d0; font-size: 7px; color: #999; }
+
     /* Recipe pages */
     .recipe-pages { display: block !important; }
     .recipe-page-break { display: block !important; page-break-before: always; height: 1px; }
@@ -339,7 +381,8 @@
   .meal-plan-divider, .meal-plan-print-header, .meal-plan-print-sub,
   .meal-print-footer, .print-exclusions,
   .recipe-pages, .recipe-page-break, .recipe-section-header,
-  .recipe-print-footer { display: none; }
+  .recipe-print-footer,
+  .shopping-list-divider, .shopping-list-print-header, .shopping-list-print-footer { display: none; }
 </style>
 </head>
 <body>
@@ -617,6 +660,26 @@
         <div class="meal-print-footer">
           <span>KetoMind · 7-Day Meal Plan · Metabolic Psychiatry · For practitioner use only</span>
           <span id="meal-print-date">—</span>
+        </div>
+      </div>
+
+      <!-- Shopping List Section -->
+      <div id="shopping-list-section" style="display:none">
+        <div class="shopping-list-divider"></div>
+        <div class="shopping-list-print-header">
+          <div class="shopping-list-print-title" id="shopping-list-print-title">Shopping List — 7-Day Keto Plan</div>
+          <div class="shopping-list-print-sub" id="shopping-list-print-sub">—</div>
+        </div>
+
+        <div class="shopping-list-screen-header">
+          <div class="shopping-list-title" id="shopping-list-title-screen">Shopping List</div>
+        </div>
+
+        <div class="shopping-list-grid" id="shopping-list-grid"></div>
+
+        <div class="shopping-list-print-footer">
+          <span>AMP Clinical Calculator · Shopping List · Metabolic Psychiatry · For practitioner use only</span>
+          <span id="shopping-list-print-date">—</span>
         </div>
       </div>
 
@@ -957,9 +1020,67 @@ Respond ONLY with valid JSON. No preamble, no markdown, no explanation. Each mea
       "totalProtein": 126,
       "totalCarbs": 17
     }
+  ],
+  "shoppingList": [
+    {
+      "category": "Produce",
+      "items": [
+        { "name": "Avocado", "quantity": "4 medium" },
+        { "name": "Spinach", "quantity": "8 cups" }
+      ]
+    },
+    {
+      "category": "Proteins",
+      "items": [
+        { "name": "Chicken thigh, boneless skinless", "quantity": "32 oz" },
+        { "name": "Eggs, large", "quantity": "21 eggs" }
+      ]
+    },
+    {
+      "category": "Dairy & Eggs",
+      "items": [
+        { "name": "Heavy cream", "quantity": "1.5 cups" }
+      ]
+    },
+    {
+      "category": "Fats & Oils",
+      "items": [
+        { "name": "Olive oil, extra virgin", "quantity": "0.75 cup" },
+        { "name": "Butter, unsalted", "quantity": "8 tbsp" }
+      ]
+    },
+    {
+      "category": "Pantry/Dry Goods",
+      "items": [
+        { "name": "Almond flour", "quantity": "1 cup" }
+      ]
+    },
+    {
+      "category": "Herbs & Spices",
+      "items": [
+        { "name": "Salt", "quantity": "to taste" },
+        { "name": "Black pepper", "quantity": "to taste" },
+        { "name": "Garlic powder", "quantity": "2 tsp" }
+      ]
+    },
+    {
+      "category": "Other",
+      "items": []
+    }
   ]
 }
-Return all 7 days (Monday through Sunday). Every meal must have a complete recipe field.`;
+
+SHOPPING LIST RULES:
+- Aggregate every ingredient across all 28 meals (7 days × 4 meals) into a single consolidated grocery list.
+- Sum quantities of identical ingredients. Examples: "2 tbsp olive oil" + "1 tbsp olive oil" = "3 tbsp olive oil"; "4 oz chicken thigh" + "6 oz chicken thigh" = "10 oz chicken thigh"; "2 large eggs" + "3 large eggs" = "5 large eggs".
+- When the same ingredient appears in different units that cannot be cleanly combined, list both quantities together in the quantity string (e.g. "10 oz, 2 medium").
+- Convert obvious sub-units when sensible (e.g. 4 tsp → can stay as 4 tsp; but 16 tbsp can become 1 cup — only convert when it clearly improves clarity).
+- Categorize every item into exactly one of: "Produce", "Proteins", "Dairy & Eggs", "Fats & Oils", "Pantry/Dry Goods", "Herbs & Spices", "Other". Use these exact category names.
+- Always include all 7 categories in the shoppingList array, even if a category's items array is empty.
+- Use clean, store-friendly item names (e.g. "Chicken thigh, boneless skinless" not "boneless skinless chicken thighs cut into cubes"). Drop preparation modifiers like "diced", "chopped", "minced", "sliced", "to taste" — those go in the recipe, not the shopping list. Exception: "Salt" and "Black pepper" can keep quantity "to taste" since they're rarely measured.
+- Categorization guidance: avocado oil, coconut oil, ghee, butter, lard, MCT oil → Fats & Oils. Cheese, cream, yogurt, eggs, milk → Dairy & Eggs. All vegetables, fruits, fresh herbs → Produce (fresh herbs like fresh basil go here, not Herbs & Spices). Dried/ground herbs, spices, salt, pepper → Herbs & Spices. Meat, poultry, seafood, deli meat, bacon → Proteins. Nuts, seeds, flours, sweeteners, vinegars, sauces, canned goods, broths, chocolate → Pantry/Dry Goods. Anything that doesn't fit (e.g. "Sparkling water") → Other.
+
+Return all 7 days (Monday through Sunday). Every meal must have a complete recipe field. The shoppingList must reflect a complete aggregation of every ingredient across all 28 meals.`;
 
     try {
       const response = await fetch('/api/chat', {
@@ -1036,6 +1157,9 @@ Return all 7 days (Monday through Sunday). Every meal must have a complete recip
     // Render print-only recipe pages
     renderRecipes(plan);
 
+    // Render shopping list
+    renderShoppingList(plan);
+
     document.getElementById('meal-plan-content').style.display = 'block';
     setTimeout(() => document.getElementById('meal-plan-content').scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
   }
@@ -1097,6 +1221,51 @@ Return all 7 days (Monday through Sunday). Every meal must have a complete recip
       </div>`;
 
     document.getElementById('recipe-pages').innerHTML = html;
+  }
+
+  function renderShoppingList(plan) {
+    const section = document.getElementById('shopping-list-section');
+    const grid = document.getElementById('shopping-list-grid');
+    const list = Array.isArray(plan.shoppingList) ? plan.shoppingList : [];
+
+    const populated = list.filter(c => c && Array.isArray(c.items) && c.items.length > 0);
+    if(populated.length === 0) {
+      section.style.display = 'none';
+      grid.innerHTML = '';
+      return;
+    }
+
+    const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+    grid.innerHTML = populated.map((cat, ci) => `
+      <div class="shopping-category">
+        <div class="shopping-category-name">${esc(cat.category)}</div>
+        <ul class="shopping-items">
+          ${cat.items.map((it, ii) => `
+            <li>
+              <label>
+                <input type="checkbox" id="sl-${ci}-${ii}">
+                <span class="item-name">${esc(it.name)}</span>
+                <span class="item-qty">${esc(it.quantity)}</span>
+              </label>
+            </li>
+          `).join('')}
+        </ul>
+      </div>
+    `).join('');
+
+    const clientName = calcResults.clientName;
+    const printTitle = clientName ? `${clientName}'s Shopping List — 7-Day Keto Plan` : 'Shopping List — 7-Day Keto Plan';
+    const screenTitle = clientName ? `${clientName}'s Shopping List` : 'Shopping List';
+    document.getElementById('shopping-list-print-title').textContent = printTitle;
+    document.getElementById('shopping-list-title-screen').textContent = screenTitle;
+
+    const dateStr = new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+    const totalItems = populated.reduce((n, c) => n + c.items.length, 0);
+    document.getElementById('shopping-list-print-sub').textContent = `${totalItems} items · Consolidated from 7-day meal plan · ${dateStr}`;
+    document.getElementById('shopping-list-print-date').textContent = dateStr;
+
+    section.style.display = 'block';
   }
 
   // Init
